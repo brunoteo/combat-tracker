@@ -12,19 +12,19 @@ export const mainListItems = (
             </ListItemIcon>
             <ListItemText primary="Quick Battle"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button disabled={true}>
             <ListItemIcon>
                 <FaCampground size="30"/>
             </ListItemIcon>
             <ListItemText primary="Campaigns"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button disabled={true}>
             <ListItemIcon>
                 <GiBlackKnightHelm size="30"/>
             </ListItemIcon>
             <ListItemText primary="Characters"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button disabled={true}>
             <ListItemIcon>
                 <GiSpikedDragonHead size="30"/>
             </ListItemIcon>

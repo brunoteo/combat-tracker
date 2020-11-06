@@ -15,7 +15,8 @@ import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import {mainListItems, secondaryListItems} from "../data/listItems";
+import {mainListItems} from "../data/listItems";
+import CardList from "./CardList";
 
 const drawerWidth = 240;
 
@@ -151,9 +152,7 @@ export default function Dashboard() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={3}>
-                        {/* Chart */}
-                    </Grid>
+                    <CardList />
                 </Container>
             </main>
         </div>

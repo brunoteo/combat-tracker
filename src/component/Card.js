@@ -3,6 +3,7 @@ import React from "react";
 import {Typography} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from '@material-ui/core/styles';
+import LinearProgressWithLabel from "./LinearProgressWithLabel";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-export default function Card({name, hp, initiative}) {
+export default function Card({name, maxHp, initiative}) {
     const classes = useStyles();
 
     return (
@@ -30,9 +30,7 @@ export default function Card({name, hp, initiative}) {
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body2">
-                                {hp}
-                            </Typography>
+                            <LinearProgressWithLabel currentHp={maxHp} maxHp={maxHp} />
                         </Grid>
                     </Grid>
                     <Grid item xs={4} container alignItems="center">

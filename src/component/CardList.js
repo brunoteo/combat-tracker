@@ -5,17 +5,17 @@ import Grid from "@material-ui/core/Grid";
 const cards = [
     {
         "name": "Player 1",
-        "hp": 10,
+        "maxHp": 10,
         "initiative": 15
     },
     {
         "name": "Player 2",
-        "hp": 20,
+        "maxHp": 20,
         "initiative": 14
     },
     {
         "name": "Enemy 1",
-        "hp": 12,
+        "maxHp": 12,
         "initiative": 10
     }
 ]

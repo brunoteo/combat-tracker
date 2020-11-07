@@ -15,7 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import {mainListItems} from "../data/listItems";
-import CardList from "./CardList";
+import PgCardList from "./PgCardList";
 
 const drawerWidth = 240;
 
@@ -151,7 +151,7 @@ export default function Dashboard() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer}/>
                 <Container maxWidth="lg" className={classes.container}>
-                    <CardList />
+                    <PgCardList />
                 </Container>
             </main>
         </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "./Card";
-import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 const cards = [
@@ -24,7 +23,7 @@ const cards = [
 export default function CardList() {
 
     return (
-        <Grid container spacing={2} >
+        <Grid container spacing={2} direction="column">
             {cards.map(card => <Card key={card.name} {...card} />)}
         </Grid>
     );

@@ -5,6 +5,9 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
     paper: {
         padding: theme.spacing(2),
         margin: 'auto',
@@ -17,6 +20,7 @@ export default function Card({name, hp, initiative}) {
     const classes = useStyles();
 
     return (
+        <div className={classes.root}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2} >
                     <Grid item xs={8} container spacing={2} direction="column">
@@ -40,5 +44,6 @@ export default function Card({name, hp, initiative}) {
                     </Grid>
                 </Grid>
             </Paper>
+        </div>
     );
 }

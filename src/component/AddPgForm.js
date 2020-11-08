@@ -29,6 +29,7 @@ export default function AddPgForm({addPg, nameRef, hpRef, armorRef, initiativeRe
                         <Grid item xs={12}>
                             <TextField
                                 inputRef={nameRef}
+                                autoFocus
                                 variant="outlined"
                                 required
                                 fullWidth

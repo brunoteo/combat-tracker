@@ -9,28 +9,32 @@ const initialCards = [
         "maxHp": 10,
         "currentHp": 10,
         "armor": 14,
-        "initiative": 15
+        "initiative": 15,
+        "status": "alive"
     },
     {
         "name": "Player 2",
         "maxHp": 20,
         "currentHp": 10,
         "armor": 18,
-        "initiative": 14
+        "initiative": 18,
+        "status": "alive"
     },
     {
         "name": "Enemy 1",
         "maxHp": 12,
         "currentHp": 10,
         "armor": 11,
-        "initiative": 10
+        "initiative": 10,
+        "status": "alive"
     },
     {
         "name": "Enemy 2",
         "maxHp": 12,
-        "currentHp": 10,
+        "currentHp": 0,
         "armor": 11,
-        "initiative": 10
+        "initiative": 10,
+        "status": "dead"
     }
 ]
 
@@ -71,13 +75,14 @@ export default function PgCardList() {
 
     const removePg = name => setCards(cards.filter(card => card.name !== name));
 
-    const handleHp = e =>
-    {
+    const handleHp = e => {
         e.preventDefault();
 
         const currentCard = cards.find(card => card.name === hpNameRef.current.value)
-        const currentHp = (Math.abs(parseInt(changeHpRef.current.value)) <= currentCard.currentHp) ? currentCard.currentHp + parseInt(changeHpRef.current.value) : 0
-        const editedCard = {...currentCard, currentHp}
+        const currentHp = (Math.abs(parseInt(changeHpRef.current.value)) <= currentCard.maxHp) ? currentCard.currentHp + parseInt(changeHpRef.current.value) : 0
+        const status = (currentHp > 0) ? "alive" : "dead"
+        const withHpChanged = {...currentCard, currentHp}
+        const editedCard = {...withHpChanged, status}
         const editedCards = cards.map(card => card.name === editedCard.name ? editedCard : card)
 
         setCards(editedCards);
@@ -86,12 +91,17 @@ export default function PgCardList() {
     return (
         <main>
             <Grid>
-                <AddPgDialog addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef} initiativeRef={initiativeRef}/>
+                <AddPgDialog addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef}
+                             initiativeRef={initiativeRef}/>
             </Grid>
-            {cards.map(card => <PgCard key={card.name}
-                                       name={card.name} maxHp={card.maxHp} currentHp={card.currentHp} armor={card.armor} initiative={card.initiative}
-                                       removePg={removePg} handleHp={handleHp} changeHpRef={changeHpRef} hpNameRef={hpNameRef}
-            />)}
+            {cards
+                .sort((a, b) => (a.initiative < b.initiative) ? 1 : -1)
+                .map(card => <PgCard key={card.name}
+                                     name={card.name} maxHp={card.maxHp} currentHp={card.currentHp} armor={card.armor}
+                                     initiative={card.initiative} status={card.status}
+                                     removePg={removePg} handleHp={handleHp} changeHpRef={changeHpRef}
+                                     hpNameRef={hpNameRef}
+                />)}
         </main>
     );
 }

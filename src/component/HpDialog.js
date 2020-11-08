@@ -40,6 +40,7 @@ export default function HpDialog({open, name, handleClose, handleHp, changeHpRef
                             />
                             <TextField
                                 inputRef={changeHpRef}
+                                autoFocus
                                 variant="outlined"
                                 required
                                 fullWidth

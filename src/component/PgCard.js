@@ -2,7 +2,7 @@ import Grid from "@material-ui/core/Grid";
 import React, {useState} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
-import {ImMagicWand, RiSwordLine} from "react-icons/all";
+import {BsFillPersonFill, FaSkull, ImMagicWand, RiSwordLine} from "react-icons/all";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
@@ -13,6 +13,7 @@ import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
 import HpDialog from "./HpDialog";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.light
     },
     avatar: {
+        backgroundColor: green[500],
+    },
+    avatarDead: {
         backgroundColor: red[500],
     },
     initiative: {
@@ -34,12 +38,15 @@ const useStyles = makeStyles((theme) => ({
     armor: {
         backgroundColor: blue[500],
     },
-    card: {
+    cardContent: {
         padding: "8px",
-    }
+    },
+    death: {
+        backgroundColor: red[300]
+    },
 }));
 
-export default function PgCard({name, maxHp, currentHp, armor, initiative, removePg, handleHp, changeHpRef, hpNameRef}) {
+export default function PgCard({name, maxHp, currentHp, armor, initiative, status, removePg, handleHp, changeHpRef, hpNameRef}) {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -54,11 +61,11 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, remov
 
     return (
         <div className={classes.root}>
-            <Card>
+            <Card className={clsx({[classes.death]: (status === "dead")})}>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                            PG
+                        <Avatar aria-label="recipe" className={clsx(classes.avatar, {[classes.avatarDead]: (status === "dead")})}>
+                            {(status === "dead") ? <FaSkull/> : <BsFillPersonFill/>}
                         </Avatar>
                     }
                     title={name}
@@ -68,7 +75,7 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, remov
                             <DeleteIcon/>
                         </IconButton>}
                 />
-                <CardContent className={classes.card}>
+                <CardContent className={classes.cardContent}>
                     <Grid container spacing={1} alignItems="center" justify="center">
                         <Grid item xs={8}>
                             <LinearProgressWithLabel currentHp={currentHp} maxHp={maxHp}/>

@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import PgCard from "./PgCard";
-import Box from "@material-ui/core/Box";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from '@material-ui/icons/Add';
+import {makeStyles} from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Tooltip from "@material-ui/core/Tooltip";
 
-const cards = [
+const initialCards = [
     {
         "name": "Player 1",
         "maxHp": 10,
@@ -23,14 +27,48 @@ const cards = [
         "currentHp": 10,
         "armor": 11,
         "initiative": 10
+    },
+    {
+        "name": "Enemy 2",
+        "maxHp": 12,
+        "currentHp": 10,
+        "armor": 11,
+        "initiative": 10
     }
 ]
 
+const useStyles = makeStyles((theme) => ({
+    fab: {
+        margin: theme.spacing(1),
+        position: "fixed",
+        bottom: theme.spacing(6),
+        right: theme.spacing(6),
+        zIndex: 1000
+    },
+}));
+
 export default function PgCardList() {
+    const classes = useStyles();
+    const [cards, setCards] = useState(initialCards);
+
+    const onAdd = () => {
+        alert("onAdd");
+    };
 
     return (
-        <Box>
+        <main>
+            <Grid>
+                <Fab
+                    className={classes.fab}
+                    color="primary"
+                    aria-label="add"
+                >
+                    <Tooltip title={"Add new character"}>
+                        <AddIcon color="inherit" onClick={onAdd} />
+                    </Tooltip>
+                </Fab>
+            </Grid>
             {cards.map(card => <PgCard key={card.name} {...card} />)}
-        </Box>
+        </main>
     );
 }

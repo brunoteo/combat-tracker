@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -21,60 +20,52 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AddPgForm({name, hp, armor, initiative}) {
+export default function AddPgForm({addPg, nameRef, hpRef, armorRef, initiativeRef}) {
     const classes = useStyles();
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
-                <form className={classes.form} noValidate autoComplete="off">
+                <form id="add-form" onSubmit={addPg} className={classes.form} noValidate autoComplete="off">
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
-                                ref={name}
+                                inputRef={nameRef}
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="name"
                                 label="Name"
-                                name="name"
                                 type="text"
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                ref={hp}
-                                name="hp"
+                                inputRef={hpRef}
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="hp"
                                 label="HP"
                                 type="number"
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                ref={armor}
+                                inputRef={armorRef}
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="armor"
                                 label="Armor"
-                                name="armor"
                                 type="number"
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <TextField
-                                ref={initiative}
+                                inputRef={initiativeRef}
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="initiative"
                                 label="Initiative"
-                                name="initiative"
                                 type="number"
                             />
                         </Grid>

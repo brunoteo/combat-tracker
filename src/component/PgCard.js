@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardHeader: {
         padding: "8px",
+        backgroundColor: theme.palette.primary.light
     },
     avatar: {
         backgroundColor: red[500],
@@ -36,12 +38,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function PgCard({name, maxHp, currentHp, armor, initiative}) {
+export default function PgCard({name, maxHp, currentHp, armor, initiative, removePg}) {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <Card >
+            <Card>
                 <CardHeader
                     avatar={
                         <Avatar aria-label="recipe" className={classes.avatar}>
@@ -50,6 +52,10 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative}) {
                     }
                     title={name}
                     className={classes.cardHeader}
+                    action={
+                        <IconButton aria-label="remove" onClick={() => removePg(name)}>
+                            <DeleteIcon/>
+                        </IconButton>}
                 />
                 <CardContent className={classes.card}>
                     <Grid container spacing={1} alignItems="center" justify="center">
@@ -62,9 +68,9 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative}) {
                             </Avatar>
                         </Grid>
                         <Grid item xs={2} align="center">
-                                <Avatar aria-label="recipe" className={classes.initiative}>
-                                    {initiative}
-                                </Avatar>
+                            <Avatar aria-label="recipe" className={classes.initiative}>
+                                {initiative}
+                            </Avatar>
                         </Grid>
                     </Grid>
                 </CardContent>

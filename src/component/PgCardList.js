@@ -86,6 +86,8 @@ export default function PgCardList() {
         handleClose()
     };
 
+    const removePg = name => setCards(cards.filter(card => card.name !== name));
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -105,10 +107,12 @@ export default function PgCardList() {
                     <Tooltip title={"Add new character"}>
                         <AddIcon color="inherit" onClick={handleClickOpen}/>
                     </Tooltip>
-                    <AddPgDialog handleClose={handleClose} open={open} addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef} initiativeRef={initiativeRef}/>
+                    <AddPgDialog handleClose={handleClose} open={open} addPg={addPg} nameRef={nameRef} hpRef={hpRef}
+                                 armorRef={armorRef} initiativeRef={initiativeRef}/>
                 </Fab>
             </Grid>
-            {cards.map(card => <PgCard key={card.name} {...card} />)}
+            {cards.map(card => <PgCard key={card.name} name={card.name} maxHp={card.maxHp} currentHp={card.currentHp}
+                                       armor={card.armor} initiative={card.initiative} removePg={removePg}/>)}
         </main>
     );
 }

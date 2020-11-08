@@ -1,5 +1,5 @@
 import Grid from "@material-ui/core/Grid";
-import React from "react";
+import React, {useState} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
 import {ImMagicWand, RiSwordLine} from "react-icons/all";
@@ -12,6 +12,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
+import HpDialog from "./HpDialog";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,8 +39,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function PgCard({name, maxHp, currentHp, armor, initiative, removePg}) {
+export default function PgCard({name, maxHp, currentHp, armor, initiative, removePg, handleHp, changeHpRef, hpNameRef}) {
     const classes = useStyles();
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className={classes.root}>
@@ -75,10 +86,12 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, remov
                     </Grid>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="Attack">
+                    <IconButton aria-label="Attack" onClick={handleClickOpen}>
                         <RiSwordLine/>
                     </IconButton>
-                    <IconButton aria-label="Conditions">
+                    <HpDialog changeHpRef={changeHpRef} open={open} handleHp={handleHp} handleClose={handleClose}
+                              name={name} currentHp={currentHp} hpNameRef={hpNameRef}/>
+                    <IconButton aria-label="Conditions" disabled={true}>
                         <ImMagicWand/>
                     </IconButton>
                 </CardActions>

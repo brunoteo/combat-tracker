@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme) => ({
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
     },
-    submit: {
-        margin: theme.spacing(2, 0, 1),
-    },
 }));
 
 export default function AddPgForm({addPg, nameRef, hpRef, armorRef, initiativeRef}) {

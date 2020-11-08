@@ -1,10 +1,6 @@
 import React, {useRef, useState} from "react";
 import PgCard from "./PgCard";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from '@material-ui/icons/Add';
-import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Tooltip from "@material-ui/core/Tooltip";
 import AddPgDialog from "./AddPgDialog";
 
 const initialCards = [
@@ -38,26 +34,15 @@ const initialCards = [
     }
 ]
 
-const useStyles = makeStyles((theme) => ({
-    fab: {
-        margin: theme.spacing(1),
-        position: "fixed",
-        bottom: theme.spacing(6),
-        right: theme.spacing(6),
-        zIndex: 1000
-    },
-}));
-
 export default function PgCardList() {
-    const classes = useStyles();
-
     const [cards, setCards] = useState(initialCards);
-    const [open, setOpen] = useState(false);
 
     const nameRef = useRef();
     const hpRef = useRef();
     const armorRef = useRef();
     const initiativeRef = useRef();
+    const changeHpRef = useRef();
+    const hpNameRef = useRef();
 
     const addPg = e => {
         e.preventDefault();
@@ -82,37 +67,31 @@ export default function PgCardList() {
         hpRef.current.value = null
         armorRef.current.value = null
         initiativeRef.current.value = null
-
-        handleClose()
     };
 
     const removePg = name => setCards(cards.filter(card => card.name !== name));
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const handleHp = e =>
+    {
+        e.preventDefault();
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+        const currentCard = cards.find(card => card.name === hpNameRef.current.value)
+        const currentHp = (Math.abs(parseInt(changeHpRef.current.value)) <= currentCard.currentHp) ? currentCard.currentHp + parseInt(changeHpRef.current.value) : 0
+        const editedCard = {...currentCard, currentHp}
+        const editedCards = cards.map(card => card.name === editedCard.name ? editedCard : card)
+
+        setCards(editedCards);
+    }
 
     return (
         <main>
             <Grid>
-                <Fab
-                    className={classes.fab}
-                    color="primary"
-                    aria-label="add"
-                >
-                    <Tooltip title={"Add new character"}>
-                        <AddIcon color="inherit" onClick={handleClickOpen}/>
-                    </Tooltip>
-                    <AddPgDialog handleClose={handleClose} open={open} addPg={addPg} nameRef={nameRef} hpRef={hpRef}
-                                 armorRef={armorRef} initiativeRef={initiativeRef}/>
-                </Fab>
+                <AddPgDialog addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef} initiativeRef={initiativeRef}/>
             </Grid>
-            {cards.map(card => <PgCard key={card.name} name={card.name} maxHp={card.maxHp} currentHp={card.currentHp}
-                                       armor={card.armor} initiative={card.initiative} removePg={removePg}/>)}
+            {cards.map(card => <PgCard key={card.name}
+                                       name={card.name} maxHp={card.maxHp} currentHp={card.currentHp} armor={card.armor} initiative={card.initiative}
+                                       removePg={removePg} handleHp={handleHp} changeHpRef={changeHpRef} hpNameRef={hpNameRef}
+            />)}
         </main>
     );
 }

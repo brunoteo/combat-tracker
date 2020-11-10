@@ -47,7 +47,7 @@ export default function PgCardList() {
                     "initiative": initiative,
                     "status": "alive"
                 }
-            ].sort((a, b) => (a.initiative < b.initiative) ? 1 : -1)
+            ].sort((a, b) => (parseInt(a.initiative) < parseInt(b.initiative)) ? 1 : -1)
         );
 
         nameRef.current.value = ""

@@ -1,44 +1,25 @@
 import React, {useRef, useState} from "react";
 import PgCard from "./PgCard";
-import Grid from "@material-ui/core/Grid";
 import AddPgDialog from "./AddPgDialog";
+import {initialCards} from "../data/stubData";
+import Fab from "@material-ui/core/Fab";
+import {makeStyles} from "@material-ui/core/styles";
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Box from "@material-ui/core/Box";
 
-const initialCards = [
-    {
-        "name": "Player 1",
-        "maxHp": 10,
-        "currentHp": 10,
-        "armor": 14,
-        "initiative": 15,
-        "status": "alive"
+const useStyles = makeStyles((theme) => ({
+    fab: {
+        margin: theme.spacing(1),
+        position: "fixed",
+        bottom: theme.spacing(6),
+        right: theme.spacing(10),
+        zIndex: 1000
     },
-    {
-        "name": "Player 2",
-        "maxHp": 20,
-        "currentHp": 10,
-        "armor": 18,
-        "initiative": 18,
-        "status": "alive"
-    },
-    {
-        "name": "Enemy 1",
-        "maxHp": 12,
-        "currentHp": 10,
-        "armor": 11,
-        "initiative": 10,
-        "status": "alive"
-    },
-    {
-        "name": "Enemy 2",
-        "maxHp": 12,
-        "currentHp": 0,
-        "armor": 11,
-        "initiative": 10,
-        "status": "dead"
-    }
-]
+}));
 
 export default function PgCardList() {
+    const classes = useStyles();
+
     const [cards, setCards] = useState(initialCards);
 
     const nameRef = useRef();
@@ -63,9 +44,11 @@ export default function PgCardList() {
                     "maxHp": hp,
                     "currentHp": hp,
                     "armor": armor,
-                    "initiative": initiative
+                    "initiative": initiative,
+                    "status": "alive"
                 }
-            ]);
+            ].sort((a, b) => (a.initiative < b.initiative) ? 1 : -1)
+        );
 
         nameRef.current.value = ""
         hpRef.current.value = null
@@ -76,7 +59,7 @@ export default function PgCardList() {
     const removePg = name => setCards(cards.filter(card => card.name !== name));
 
     const handleHp = e => {
-        e.preventDefault();
+        e.preventDefault()
 
         const currentCard = cards.find(card => card.name === hpNameRef.current.value)
         const currentHp = (Math.abs(parseInt(changeHpRef.current.value)) <= currentCard.maxHp) ? currentCard.currentHp + parseInt(changeHpRef.current.value) : 0
@@ -85,20 +68,37 @@ export default function PgCardList() {
         const editedCard = {...withHpChanged, status}
         const editedCards = cards.map(card => card.name === editedCard.name ? editedCard : card)
 
-        setCards(editedCards);
+        setCards(editedCards)
+    }
+
+    const nextTurn = () => {
+        let cardList = cards
+        cardList[0].isCurrentTurn = false
+
+        const moveCurrentToTheEnd = cardList.concat(cardList.splice(0, 1))
+
+        moveCurrentToTheEnd[0].isCurrentTurn = true
+
+        setCards(moveCurrentToTheEnd)
     }
 
     return (
         <main>
-            <Grid>
+            <Box>
                 <AddPgDialog addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef}
                              initiativeRef={initiativeRef}/>
-            </Grid>
+                <Fab
+                    className={classes.fab}
+                    color="primary"
+                    aria-label="next turn"
+                >
+                    <PlayArrowIcon color="inherit" onClick={nextTurn}/>
+                </Fab>
+            </Box>
             {cards
-                .sort((a, b) => (a.initiative < b.initiative) ? 1 : -1)
                 .map(card => <PgCard key={card.name}
                                      name={card.name} maxHp={card.maxHp} currentHp={card.currentHp} armor={card.armor}
-                                     initiative={card.initiative} status={card.status}
+                                     initiative={card.initiative} status={card.status} isCurrentTurn={card.isCurrentTurn}
                                      removePg={removePg} handleHp={handleHp} changeHpRef={changeHpRef}
                                      hpNameRef={hpNameRef}
                 />)}

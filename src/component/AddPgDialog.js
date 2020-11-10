@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         position: "fixed",
         bottom: theme.spacing(6),
-        right: theme.spacing(6),
+        right: theme.spacing(2),
         zIndex: 1000
     },
 }));
@@ -50,11 +50,11 @@ export default function AddPgDialog({addPg, nameRef, hpRef, armorRef, initiative
                                initiativeRef={initiativeRef}/>
                 </DialogContent>
                 <DialogActions>
-                    <Button type="submit" form="add-form" color="primary" onClick={handleClose}>
-                        Add
-                    </Button>
                     <Button onClick={handleClose} color="primary">
                         Cancel
+                    </Button>
+                    <Button type="submit" form="add-form" color="primary" onClick={handleClose}>
+                        Add
                     </Button>
                 </DialogActions>
             </Dialog>

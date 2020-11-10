@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+//TODO serve veramente l'oggetto form?
 export default function HpDialog({open, name, handleClose, handleHp, changeHpRef, hpNameRef}) {
     const classes = useStyles();
 

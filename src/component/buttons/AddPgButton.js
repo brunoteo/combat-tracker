@@ -4,7 +4,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import React, {useState} from "react";
-import AddPgForm from "./AddPgForm";
+import AddPgForm from "../AddPgForm";
 import Tooltip from "@material-ui/core/Tooltip";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AddPgDialog({addPg, nameRef, hpRef, armorRef, initiativeRef}) {
+export default function AddPgButton({addPg, nameRef, hpRef, armorRef, initiativeRef}) {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);

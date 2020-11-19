@@ -1,25 +1,10 @@
 import React, {useRef, useState} from "react";
 import PgCard from "./PgCard";
-import AddPgDialog from "./AddPgDialog";
+import AddPgButton from "./buttons/AddPgButton";
 import {initialCards} from "../data/stubData";
-import Fab from "@material-ui/core/Fab";
-import {makeStyles} from "@material-ui/core/styles";
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import Box from "@material-ui/core/Box";
-
-const useStyles = makeStyles((theme) => ({
-    fab: {
-        margin: theme.spacing(1),
-        position: "fixed",
-        bottom: theme.spacing(6),
-        right: theme.spacing(10),
-        zIndex: 1000
-    },
-}));
+import NextTurnButton from "./buttons/NextTurnButton";
 
 export default function PgCardList() {
-    const classes = useStyles();
-
     const [cards, setCards] = useState(initialCards);
 
     const nameRef = useRef();
@@ -84,23 +69,14 @@ export default function PgCardList() {
 
     return (
         <main>
-            <Box>
-                <AddPgDialog addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef}
-                             initiativeRef={initiativeRef}/>
-                <Fab
-                    className={classes.fab}
-                    color="primary"
-                    aria-label="next turn"
-                >
-                    <PlayArrowIcon color="inherit" onClick={nextTurn}/>
-                </Fab>
-            </Box>
+            <AddPgButton addPg={addPg}
+                         nameRef={nameRef} hpRef={hpRef} armorRef={armorRef} initiativeRef={initiativeRef}/>
+            <NextTurnButton nextTurn={nextTurn}/>
             {cards
                 .map(card => <PgCard key={card.name}
-                                     name={card.name} maxHp={card.maxHp} currentHp={card.currentHp} armor={card.armor}
-                                     initiative={card.initiative} status={card.status} isCurrentTurn={card.isCurrentTurn}
-                                     removePg={removePg} handleHp={handleHp} changeHpRef={changeHpRef}
-                                     hpNameRef={hpNameRef}
+                                     {...card}
+                                     removePg={removePg} handleHp={handleHp}
+                                     changeHpRef={changeHpRef} hpNameRef={hpNameRef}
                 />)}
         </main>
     );

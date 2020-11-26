@@ -47,10 +47,18 @@ export default function PgCardList() {
         e.preventDefault()
 
         const currentCard = cards.find(card => card.name === hpNameRef.current.value)
-        const currentHp = (Math.abs(parseInt(changeHpRef.current.value)) <= currentCard.maxHp) ? currentCard.currentHp + parseInt(changeHpRef.current.value) : 0
+
+        let currentHp = parseInt(currentCard.currentHp) + parseInt(changeHpRef.current.value)
+
+        if (currentHp > parseInt(currentCard.maxHp)) {
+            currentHp = parseInt(currentCard.maxHp)
+        } else if (currentHp < 0) {
+            currentHp = 0
+        }
+
         const status = (currentHp > 0) ? "alive" : "dead"
-        const withHpChanged = {...currentCard, currentHp}
-        const editedCard = {...withHpChanged, status}
+        const editedCard = {...currentCard, currentHp, status}
+
         const editedCards = cards.map(card => card.name === editedCard.name ? editedCard : card)
 
         setCards(editedCards)
@@ -60,11 +68,11 @@ export default function PgCardList() {
         let cardList = cards
         cardList[0].isCurrentTurn = false
 
-        const moveCurrentToTheEnd = cardList.concat(cardList.splice(0, 1))
+        const orderedCards = cardList.concat(cardList.splice(0, 1))
 
-        moveCurrentToTheEnd[0].isCurrentTurn = true
+        orderedCards[0].isCurrentTurn = true
 
-        setCards(moveCurrentToTheEnd)
+        setCards(orderedCards)
     }
 
     return (

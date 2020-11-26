@@ -46,8 +46,7 @@ export default function AddPgButton({addPg, nameRef, hpRef, armorRef, initiative
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Add character</DialogTitle>
                 <DialogContent>
-                    <AddPgForm addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef}
-                               initiativeRef={initiativeRef}/>
+                    <AddPgForm addPg={addPg} nameRef={nameRef} hpRef={hpRef} armorRef={armorRef} initiativeRef={initiativeRef}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

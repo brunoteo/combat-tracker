@@ -9,13 +9,13 @@ const normalise = (value, max) => (value) * 100 / (max);
 export default function LinearProgressWithLabel({currentHp, maxHp}) {
     return (
         <Box display="flex" alignItems="center">
-            <Box minWidth={20}>
+            <Box>
                 <AiFillHeart/>
             </Box>
-            <Box width="100%" mr={1}>
+            <Box width="100%" ml={1} mr={1}>
                 <LinearProgress variant="determinate" value={normalise(currentHp, maxHp)} />
             </Box>
-            <Box minWidth={30}>
+            <Box>
                 <Typography variant="body2" color="textSecondary">{currentHp}/{maxHp}</Typography>
             </Box>
 

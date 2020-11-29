@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: blue[500],
     },
     cardContent: {
-        padding: "8px",
+        marginLeft: "8px",
+        marginRight: "8px"
     },
     death: {
         backgroundColor: red[300]
@@ -81,15 +82,15 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, statu
                 />
                 <CardContent className={classes.cardContent}>
                     <Grid container spacing={1} alignItems="center" justify="center">
-                        <Grid item xs={8}>
+                        <Grid item sm={8} xs={12}>
                             <LinearProgressWithLabel currentHp={currentHp} maxHp={maxHp}/>
                         </Grid>
-                        <Grid item xs={2} align="center">
+                        <Grid item sm={2} xs={6} align="center">
                             <Avatar aria-label="recipe" className={classes.armor}>
                                 {armor}
                             </Avatar>
                         </Grid>
-                        <Grid item xs={2} align="center">
+                        <Grid item sm={2} xs={6} align="center">
                             <Avatar aria-label="recipe" className={classes.initiative}>
                                 {initiative}
                             </Avatar>

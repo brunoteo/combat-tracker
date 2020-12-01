@@ -34,7 +34,7 @@ export default function PlayerCardProvider({ children }) {
                     "currentHp": hp,
                     "armor": armor,
                     "initiative": initiative,
-                    "status": "alive"
+                    "isAlive": true
                 }
             ].sort((a, b) => (parseInt(a.initiative) < parseInt(b.initiative)) ? 1 : -1)
         );

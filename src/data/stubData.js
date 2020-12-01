@@ -1,4 +1,3 @@
-// TODO status può diventare isAlive = bool
 export const initialCards = [
     {
         "name": "Player 2",
@@ -6,7 +5,7 @@ export const initialCards = [
         "currentHp": 10,
         "armor": 18,
         "initiative": 18,
-        "status": "alive",
+        "isAlive": true,
         "isCurrentTurn": true
     },
     {
@@ -15,7 +14,7 @@ export const initialCards = [
         "currentHp": 10,
         "armor": 14,
         "initiative": 15,
-        "status": "alive",
+        "isAlive": true,
         "isCurrentTurn": false
     },
     {
@@ -24,7 +23,7 @@ export const initialCards = [
         "currentHp": 10,
         "armor": 11,
         "initiative": 10,
-        "status": "alive",
+        "isAlive": true,
         "isCurrentTurn": false
     },
     {
@@ -33,7 +32,7 @@ export const initialCards = [
         "currentHp": 0,
         "armor": 11,
         "initiative": 10,
-        "status": "dead",
+        "isAlive": false,
         "isCurrentTurn": false
     }
 ]

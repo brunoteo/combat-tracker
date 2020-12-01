@@ -13,7 +13,7 @@ import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from "clsx";
-import SimpleModal from "./modal/SimpleModal";
+import ChangeHpModal from "./modal/ChangeHpModal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -88,7 +88,7 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, statu
                     </Grid>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <SimpleModal name={name} />
+                    <ChangeHpModal name={name} />
                     <IconButton aria-label="Conditions" disabled={true}>
                         <ImMagicWand/>
                     </IconButton>

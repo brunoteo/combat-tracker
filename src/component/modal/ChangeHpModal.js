@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import IconButton from "@material-ui/core/IconButton";
-import { RiSwordLine } from "react-icons/all";
+import {RiSwordLine} from "react-icons/all";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useInput } from "../../hooks/useInput"
-import { usePlayerCards } from "../../hooks/PlayerCardProvider"
+import {useInput} from "../../hooks/useInput"
+import {usePlayerCards} from "../../hooks/PlayerCardProvider"
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SimpleModal({name}) {
+export default function ChangeHpModal({name}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [hpValue, resetHp] = useInput(0);
@@ -58,9 +59,11 @@ export default function SimpleModal({name}) {
 
     return (
         <div>
-            <IconButton aria-label="Attack" onClick={handleOpen}>
-                <RiSwordLine />
-            </IconButton>
+            <Tooltip title={"Change HP"}>
+                <IconButton aria-label="Attack" onClick={handleOpen}>
+                    <RiSwordLine />
+                </IconButton>
+            </Tooltip>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -70,7 +73,7 @@ export default function SimpleModal({name}) {
                 <div className={classes.paper}>
                     <h2>Change {name} HP</h2>
                     <form onSubmit={handleHp} className={classes.form}
-                        autoComplete="off">
+                          autoComplete="off">
                         <TextField
                             {...hpValue}
                             autoFocus
@@ -82,7 +85,7 @@ export default function SimpleModal({name}) {
                         />
                         <div className={classes.buttons}>
                             <Button type="submit" color="primary">
-                                Change
+                                Add
                             </Button>
                             <Button color="primary" onClick={handleCloseButton}>
                                 Cancel

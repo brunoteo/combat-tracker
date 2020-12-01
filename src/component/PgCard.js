@@ -14,6 +14,7 @@ import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
 import HpDialog from "./HpDialog";
 import clsx from "clsx";
+import SimpleModal from "./modal/SimpleModal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -98,9 +99,7 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, statu
                     </Grid>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="Attack" onClick={handleClickOpen}>
-                        <RiSwordLine/>
-                    </IconButton>
+                    <SimpleModal name={name} />
                     <HpDialog changeHpRef={changeHpRef} open={open} handleHp={handleHp} handleClose={handleClose}
                               name={name} currentHp={currentHp} hpNameRef={hpNameRef}/>
                     <IconButton aria-label="Conditions" disabled={true}>

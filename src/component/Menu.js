@@ -11,7 +11,7 @@ import Drawer from "@material-ui/core/Drawer";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import {mainListItems} from "../data/listItems";
+import {menuListItems} from "../data/listItems";
 import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -133,7 +133,7 @@ export default function Menu() {
                     </IconButton>
                 </div>
                 <Divider/>
-                <List>{mainListItems}</List>
+                <List>{menuListItems}</List>
             </Drawer>
         </Box>
     )

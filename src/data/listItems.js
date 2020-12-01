@@ -4,7 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {FaCampground, GiBlackKnightHelm, GiSpikedDragonHead, RiSwordLine} from "react-icons/all";
 
-export const mainListItems = (
+export const menuListItems = (
     <div>
         <ListItem button>
             <ListItemIcon>

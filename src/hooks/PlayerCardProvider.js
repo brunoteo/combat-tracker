@@ -1,10 +1,10 @@
-import React, { createContext, useState, useContext } from "react";
+import React, {createContext, useState, useContext} from "react";
 import {initialCards} from "../data/stubData.js";
 
 const PlayerCardContext = createContext();
 export const usePlayerCards = () => useContext(PlayerCardContext);
 
-export default function PlayerCardProvider({ children }) {
+export default function PlayerCardProvider({children}) {
     const [playerCards, setPlayerCards] = useState(initialCards);
 
     const calculateHp = (currentHp, amountToAdd, maxHp) => Math.max(Math.min(currentHp + parseInt(amountToAdd), maxHp), 0);
@@ -13,7 +13,11 @@ export default function PlayerCardProvider({ children }) {
         setPlayerCards(
             playerCards.map(
                 playerCard => (playerCard.name === name) ?
-                    {...playerCard, currentHp: calculateHp(playerCard.currentHp, amountToAdd, playerCard.maxHp)} :
+                    {
+                        ...playerCard,
+                        currentHp: calculateHp(playerCard.currentHp, amountToAdd, playerCard.maxHp),
+                        isAlive: calculateHp(playerCard.currentHp, amountToAdd, playerCard.maxHp) > 0 //TODO fa cagare il dover richiamare calculateHP
+                    } :
                     playerCard
             )
         );
@@ -41,7 +45,7 @@ export default function PlayerCardProvider({ children }) {
     };
 
     return (
-        <PlayerCardContext.Provider value={{ playerCards, changeHp, removePlayerCard, addPlayerCard }}>
+        <PlayerCardContext.Provider value={{playerCards, changeHp, removePlayerCard, addPlayerCard}}>
             {children}
         </PlayerCardContext.Provider>
     );

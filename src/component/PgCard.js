@@ -51,16 +51,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PgCard({name, maxHp, currentHp, armor, initiative, status, isAlive, isCurrentTurn, removePg}) {
-    const classes = useStyles();
+export default function PgCard({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePg}) {
+    const classes = useStyles()
+
+    const isAlive = currentHp > 0
 
     return (
         <div className={classes.root}>
-            <Card className={clsx({[classes.death]: (status === "dead"), [classes.currentCard]: (isCurrentTurn)})}>
+            <Card className={clsx({[classes.death]: !isAlive, [classes.currentCard]: (isCurrentTurn)})}>
                 <CardHeader
                     avatar={
                         <Avatar aria-label="recipe" className={clsx(classes.avatar, {[classes.avatarDead]: !isAlive})}>
-                            {isAlive ?<BsFillPersonFill/> : <FaSkull/> }
+                            {isAlive ? <BsFillPersonFill/> : <FaSkull/> }
                         </Avatar>
                     }
                     title={name}

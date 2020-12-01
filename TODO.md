@@ -1,9 +1,11 @@
 # Next steps
 
 - [X] HpDialog remove form
-    - [ ] set alive or dead
+    - [X] set alive or dead
 - [ ] edit armor, initiative, maxHp on PgCard
-- [ ] Validation on AddPgForm (problem with Dialog button)
+- [X] Validation on AddPgForm (problem with Dialog button)
 - [ ] mobile hide menu on left and open full page the page
 - [ ] create model
 - [ ] generic modal
+- [ ] add passive perception
+- [ ] handle next turn

@@ -5,7 +5,6 @@ export const initialCards = [
         "currentHp": 10,
         "armor": 18,
         "initiative": 18,
-        "isAlive": true,
         "isCurrentTurn": true
     },
     {
@@ -14,7 +13,6 @@ export const initialCards = [
         "currentHp": 10,
         "armor": 14,
         "initiative": 15,
-        "isAlive": true,
         "isCurrentTurn": false
     },
     {
@@ -23,7 +21,6 @@ export const initialCards = [
         "currentHp": 10,
         "armor": 11,
         "initiative": 10,
-        "isAlive": true,
         "isCurrentTurn": false
     },
     {
@@ -32,7 +29,6 @@ export const initialCards = [
         "currentHp": 0,
         "armor": 11,
         "initiative": 10,
-        "isAlive": false,
         "isCurrentTurn": false
     }
 ]

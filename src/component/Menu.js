@@ -17,6 +17,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 
 const drawerWidth = 240;
+const drawerWidthMobile = window.screen.width;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+        [theme.breakpoints.down('sm')]: {
+            width: `calc(100% - ${drawerWidthMobile}px)`,
+        },
     },
     menuButton: {
         marginRight: 36,
@@ -64,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+        [theme.breakpoints.down('sm')]: {
+             width: drawerWidthMobile,
+        },
     },
     drawerPaperClose: {
         overflowX: 'hidden',
@@ -74,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(7),
         [theme.breakpoints.up('sm')]: {
             width: theme.spacing(9),
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: "0px",
         },
     },
     paper: {

@@ -12,7 +12,7 @@ export default function LinearProgressWithLabel({currentHp, maxHp}) {
             <Box>
                 <AiFillHeart/>
             </Box>
-            <Box width="100%" ml={1} mr={1}>
+            <Box width="100%" sx={{ m: 1 }} dx={{m:1}}>
                 <LinearProgress variant="determinate" value={normalise(currentHp, maxHp)} />
             </Box>
             <Box>

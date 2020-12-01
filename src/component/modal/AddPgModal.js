@@ -93,9 +93,9 @@ export default function AddPgModal() {
                 aria-label="add"
             >
                 <Tooltip title={"Add new character"}>
-                    <IconButton aria-label="Attack" color="inherit" onClick={handleOpen}>
-                        <AddIcon />
-                    </IconButton>
+                    {/* <IconButton aria-label="Attack"  > */}
+                        <AddIcon onClick={handleOpen} color="inherit"/>
+                    {/* </IconButton> */}
                 </Tooltip>
             </Fab>
             <Modal

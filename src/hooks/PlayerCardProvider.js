@@ -37,15 +37,16 @@ export default function PlayerCardProvider({children}) {
                     "maxHp": hp,
                     "currentHp": hp,
                     "armor": armor,
-                    "initiative": initiative,
-                    "isAlive": true
+                    "initiative": initiative
                 }
             ].sort((a, b) => (parseInt(a.initiative) < parseInt(b.initiative)) ? 1 : -1)
         );
     };
 
+    const shiftPlayerCards = () => setPlayerCards(playerCards.slice(1).concat(playerCards.slice(0,1)))
+
     return (
-        <PlayerCardContext.Provider value={{playerCards, changeHp, removePlayerCard, addPlayerCard}}>
+        <PlayerCardContext.Provider value={{playerCards, changeHp, removePlayerCard, addPlayerCard, shiftPlayerCards}}>
             {children}
         </PlayerCardContext.Provider>
     );

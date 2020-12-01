@@ -1,17 +1,10 @@
-import React, {useRef, useState} from "react";
+import React from "react";
 import PgCard from "./PgCard";
 import NextTurnButton from "./buttons/NextTurnButton";
 import { usePlayerCards } from "../hooks/PlayerCardProvider";
 
 export default function PgCardList() {
     const {playerCards} = usePlayerCards();
-
-    const nameRef = useRef();
-    const hpRef = useRef();
-    const armorRef = useRef();
-    const initiativeRef = useRef();
-    const changeHpRef = useRef();
-    const hpNameRef = useRef();
 
     const nextTurn = () => {}
     //     let cardList = cards
@@ -30,10 +23,7 @@ export default function PgCardList() {
                          nameRef={nameRef} hpRef={hpRef} armorRef={armorRef} initiativeRef={initiativeRef}/> */}
             <NextTurnButton nextTurn={nextTurn}/>
             {playerCards
-                .map(playerCard => <PgCard key={playerCard.name}
-                                     {...playerCard}
-                                     changeHpRef={changeHpRef} hpNameRef={hpNameRef}
-                />)}
+                .map(playerCard => <PgCard key={playerCard.name} {...playerCard}/>)}
         </main>
     );
 }

@@ -1,8 +1,8 @@
 import Grid from "@material-ui/core/Grid";
-import React, {useState} from "react";
+import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
-import {BsFillPersonFill, FaSkull, ImMagicWand, RiSwordLine} from "react-icons/all";
+import {BsFillPersonFill, FaSkull, ImMagicWand} from "react-icons/all";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
@@ -12,7 +12,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
-import HpDialog from "./HpDialog";
 import clsx from "clsx";
 import SimpleModal from "./modal/SimpleModal";
 
@@ -52,18 +51,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PgCard({name, maxHp, currentHp, armor, initiative, status, isCurrentTurn, removePg, handleHp, changeHpRef, hpNameRef}) {
+export default function PgCard({name, maxHp, currentHp, armor, initiative, status, isCurrentTurn, removePg}) {
     const classes = useStyles();
-
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     return (
         <div className={classes.root}>
@@ -100,8 +89,6 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, statu
                 </CardContent>
                 <CardActions disableSpacing>
                     <SimpleModal name={name} />
-                    <HpDialog changeHpRef={changeHpRef} open={open} handleHp={handleHp} handleClose={handleClose}
-                              name={name} currentHp={currentHp} hpNameRef={hpNameRef}/>
                     <IconButton aria-label="Conditions" disabled={true}>
                         <ImMagicWand/>
                     </IconButton>

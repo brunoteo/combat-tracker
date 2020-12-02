@@ -47,7 +47,7 @@ export default function ChangeHpModal({name}) {
 
     const handleHp = e => {
         e.preventDefault();
-        changeHp(name, hpValue.value)
+        changeHp(name, parseInt(hpValue.value))
         resetHp();
         handleClose();
     };

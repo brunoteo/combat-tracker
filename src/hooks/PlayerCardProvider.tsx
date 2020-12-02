@@ -1,22 +1,30 @@
 import React, {createContext, useState, useContext} from "react";
-// import {initialCards} from "../data/stubData";
+import { Player } from "../data/stubData";
+import {initialCards} from "../data/stubData";
 
-const PlayerCardContext = createContext();
+type PlayerCardsContextType = {
+    playerCards: Array<Player>;
+    changeHp: (name: string, amountToAdd: number) => void
+    removePlayerCard: (name: string) => void
+    addPlayerCard: (name: string, hp: number, armor: number, initiative: number) => void
+    shiftPlayerCards: () => void
+}
+
+const PlayerCardContext = createContext<PlayerCardsContextType | null>(null);
 export const usePlayerCards = () => useContext(PlayerCardContext);
 
-export default function PlayerCardProvider({children}) {
-    const [playerCards, setPlayerCards] = useState(initialCards);
+export default function PlayerCardProvider({children}: {children: any}) {
+    const [playerCards, setPlayerCards] = useState<Array<Player>>(initialCards);
 
-    const calculateHp = (currentHp: numeric, amountToAdd: numeric, maxHp: numeric) => Math.max(Math.min(currentHp + parseInt(amountToAdd), maxHp), 0);
+    const calculateHp = (currentHp: number, amountToAdd: number, maxHp: number) => Math.max(Math.min(currentHp + amountToAdd, maxHp), 0);
 
-    const changeHp = (name, amountToAdd) => {
+    const changeHp = (name: string, amountToAdd: number) => {
         setPlayerCards(
             playerCards.map(
                 playerCard => (playerCard.name === name) ?
                     {
                         ...playerCard,
-                        currentHp: calculateHp(playerCard.currentHp, amountToAdd, playerCard.maxHp),
-                        isAlive: calculateHp(playerCard.currentHp, amountToAdd, playerCard.maxHp) > 0 //TODO fa cagare il dover richiamare calculateHP
+                        currentHp: calculateHp(playerCard.currentHp, amountToAdd, playerCard.maxHp)
                     } :
                     playerCard
             )
@@ -29,17 +37,12 @@ export default function PlayerCardProvider({children}) {
         )
     }
 
-    const addPlayerCard = (name, hp, armor, initiative) => {
+    const addPlayerCard = (name: string, hp: number, armor: number, initiative: number) => {
         setPlayerCards(
-            [...playerCards,
-                {
-                    "name": name,
-                    "maxHp": hp,
-                    "currentHp": hp,
-                    "armor": armor,
-                    "initiative": initiative
-                }
-            ].sort((a, b) => (parseInt(a.initiative) < parseInt(b.initiative)) ? 1 : -1)
+            [
+                ...playerCards,
+                new Player(name, hp, hp, armor, initiative, false)
+            ].sort((a, b) => (a.initiative < b.initiative) ? 1 : -1)
         );
     };
 

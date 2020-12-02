@@ -1,10 +1,10 @@
 export class Player {
-    name: string;
-    maxHp: number;
-    currentHp: number;
-    armor: number;
-    initiative: number;
-    isCurrentTurn: boolean;
+    readonly name: string;
+    readonly maxHp: number;
+    readonly currentHp: number;
+    readonly armor: number;
+    readonly initiative: number;
+    readonly isCurrentTurn: boolean;
 
     constructor(name: string,
         maxHp: number,

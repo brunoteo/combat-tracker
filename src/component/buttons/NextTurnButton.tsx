@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NextTurnButton() {
     const classes = useStyles();
-    const {shiftPlayerCards} = usePlayerCards();
+    const shiftPlayerCards = usePlayerCards()?.shiftPlayerCards;
 
     return (
         <Fab

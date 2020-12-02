@@ -1,5 +1,5 @@
 import React, {createContext, useState, useContext} from "react";
-import {initialCards} from "../data/stubData.js";
+// import {initialCards} from "../data/stubData";
 
 const PlayerCardContext = createContext();
 export const usePlayerCards = () => useContext(PlayerCardContext);
@@ -7,7 +7,7 @@ export const usePlayerCards = () => useContext(PlayerCardContext);
 export default function PlayerCardProvider({children}) {
     const [playerCards, setPlayerCards] = useState(initialCards);
 
-    const calculateHp = (currentHp, amountToAdd, maxHp) => Math.max(Math.min(currentHp + parseInt(amountToAdd), maxHp), 0);
+    const calculateHp = (currentHp: numeric, amountToAdd: numeric, maxHp: numeric) => Math.max(Math.min(currentHp + parseInt(amountToAdd), maxHp), 0);
 
     const changeHp = (name, amountToAdd) => {
         setPlayerCards(
@@ -23,7 +23,7 @@ export default function PlayerCardProvider({children}) {
         );
     }
 
-    const removePlayerCard = (name) => {
+    const removePlayerCard = (name: string) => {
         setPlayerCards(
             playerCards.filter(playerCard => playerCard.name !== name)
         )

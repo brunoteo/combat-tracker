@@ -14,6 +14,7 @@ import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from "clsx";
 import ChangeHpModal from "./modal/ChangeHpModal";
+import {usePlayerCards} from "../hooks/PlayerCardProvider";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,6 +55,8 @@ const useStyles = makeStyles((theme) => ({
 export default function PgCard({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePg}) {
     const classes = useStyles()
 
+    const {removePlayerCard} = usePlayerCards();
+
     const isAlive = currentHp > 0
 
     return (
@@ -68,7 +71,7 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, isCur
                     title={name}
                     className={classes.cardHeader}
                     action={
-                        <IconButton aria-label="remove" onClick={() => removePg(name)}>
+                        <IconButton aria-label="remove" onClick={() => removePlayerCard(name)}>
                             <DeleteIcon/>
                         </IconButton>}
                 />

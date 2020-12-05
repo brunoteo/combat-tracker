@@ -1,5 +1,5 @@
 import React, {createContext, useState, useContext} from "react";
-import { Player } from "../data/stubData";
+import { Player } from "../shared/Player";
 import {initialCards} from "../data/stubData";
 
 type PlayerCardsContextType = {

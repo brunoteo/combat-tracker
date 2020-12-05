@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import {PgCard} from "./PgCard";
-import NextTurnButton from "./buttons/NextTurnButton";
+import {NextTurnButton} from "./buttons/NextTurnButton";
 import { usePlayerCards } from "../hooks/PlayerCardProvider";
-import AddPgModal from "./modal/AddPgModal";
+import {AddPgModal} from "./modal/AddPgModal";
 
 export const PgCardList: FC = () => {
     const {playerCards, removePlayerCard} = usePlayerCards();

@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function AddPgModal() {
+export const AddPgModal = () => {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);

@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Menu() {
+export const Menu = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 

@@ -1,11 +1,4 @@
-export type Player = {
-    name: string;
-    maxHp: number;
-    currentHp: number;
-    armor: number;
-    initiative: number;
-    isCurrentTurn: boolean;
-}
+import { Player } from "../shared/Player";
 
 export const initialCards: Player[] = [
     {name: "Player 2", maxHp: 20, currentHp: 10, armor: 18, initiative: 18, isCurrentTurn: true},

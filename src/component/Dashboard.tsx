@@ -1,8 +1,9 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import PgCardList from "./PgCardList";
+import {PgCardList} from "./PgCardList";
 import Menu from "./Menu";
+import { PlayerCardProvider } from '../hooks/PlayerCardProvider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,7 +33,9 @@ export default function Dashboard() {
             <main className={classes.content}>
                 <div className={classes.appBarSpacer}/>
                 <Container maxWidth="lg" className={classes.container}>
-                    <PgCardList/>
+                    <PlayerCardProvider>
+                        <PgCardList/>
+                    </PlayerCardProvider>
                 </Container>
             </main>
         </div>

@@ -1,30 +1,15 @@
-export class Player {
-    readonly name: string;
-    readonly maxHp: number;
-    readonly currentHp: number;
-    readonly armor: number;
-    readonly initiative: number;
-    readonly isCurrentTurn: boolean;
-
-    constructor(name: string,
-        maxHp: number,
-        currentHp: number,
-        armor: number,
-        initiative: number,
-        isCurrentTurn: boolean)
-    {
-        this.name = name;
-        this.maxHp = maxHp;
-        this.currentHp = currentHp;
-        this.armor = armor;
-        this.initiative = initiative;
-        this.isCurrentTurn = isCurrentTurn;
-    }
+export type Player = {
+    name: string;
+    maxHp: number;
+    currentHp: number;
+    armor: number;
+    initiative: number;
+    isCurrentTurn: boolean;
 }
 
-export const initialCards: Array<Player> = [
-    new Player("Player 2", 20, 10, 18, 18, true),
-    new Player("Player 1", 10, 10, 14, 15, false),
-    new Player("Enemy 1", 12, 10, 11, 10, false),
-    new Player("Enemy 2", 12, 0, 11, 10, false),
+export const initialCards: Player[] = [
+    {name: "Player 2", maxHp: 20, currentHp: 10, armor: 18, initiative: 18, isCurrentTurn: true},
+    {name: "Player 1", maxHp: 10, currentHp: 10, armor: 14, initiative: 15, isCurrentTurn: false},
+    {name: "Enemy 1", maxHp: 12, currentHp: 10, armor: 11, initiative: 10, isCurrentTurn: false},
+    {name: "Enemy 2", maxHp: 12, currentHp: 0, armor: 11, initiative: 10, isCurrentTurn: false},
 ];

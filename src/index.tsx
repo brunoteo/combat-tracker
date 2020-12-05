@@ -3,13 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import PlayerCardProvider from './hooks/PlayerCardProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <PlayerCardProvider>
       <App />
-    </PlayerCardProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

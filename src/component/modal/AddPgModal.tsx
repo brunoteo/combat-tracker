@@ -1,8 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import IconButton from "@material-ui/core/IconButton";
-import {RiSwordLine} from "react-icons/all";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {useInput} from "../../hooks/useInput"
@@ -11,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fab from "@material-ui/core/Fab";
+import { FormEvent } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -46,10 +45,10 @@ export default function AddPgModal() {
 
     const [open, setOpen] = React.useState(false);
 
-    const [nameValue, resetName] = useInput("");
-    const [hpValue, resetHp] = useInput("");
-    const [armorValue, resetArmor] = useInput("");
-    const [initiativeValue, resetInitiative] = useInput("");
+    const nameInput = useInput("");
+    const hpInput = useInput("");
+    const armorInput = useInput("");
+    const initiativeInput = useInput("");
 
     const {addPlayerCard} = usePlayerCards();
 
@@ -61,26 +60,26 @@ export default function AddPgModal() {
         setOpen(false)
     }
 
-    const handleNewPg = e => {
+    const handleNewPg = (e: FormEvent) => {
         e.preventDefault()
 
-        addPlayerCard(nameValue.value, hpValue.value, armorValue.value, initiativeValue.value)
+        addPlayerCard(nameInput.inputValue, Number(hpInput.inputValue), Number(armorInput.inputValue), Number(initiativeInput.inputValue))
 
-        resetName()
-        resetHp()
-        resetArmor()
-        resetInitiative()
+        nameInput.reset()
+        hpInput.reset()
+        armorInput.reset()
+        initiativeInput.reset()
 
         handleClose();
     }
 
-    const handleCloseButton = e => {
+    const handleCloseButton = (e: FormEvent) => {
         e.preventDefault()
 
-        resetName()
-        resetHp()
-        resetArmor()
-        resetInitiative()
+        nameInput.reset()
+        hpInput.reset()
+        armorInput.reset()
+        initiativeInput.reset()
 
         handleClose()
     }
@@ -93,9 +92,7 @@ export default function AddPgModal() {
                 aria-label="add"
             >
                 <Tooltip title={"Add new character"}>
-                    {/* <IconButton aria-label="Attack"  > */}
-                        <AddIcon onClick={handleOpen} color="inherit"/>
-                    {/* </IconButton> */}
+                    <AddIcon onClick={handleOpen} color="inherit"/>
                 </Tooltip>
             </Fab>
             <Modal
@@ -109,7 +106,8 @@ export default function AddPgModal() {
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
-                                    {...nameValue}
+                                    value={nameInput.inputValue}
+                                    onChange={nameInput.onChange}
                                     autoFocus
                                     variant="outlined"
                                     required
@@ -120,7 +118,8 @@ export default function AddPgModal() {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    {...hpValue}
+                                    value={hpInput.inputValue}
+                                    onChange={hpInput.onChange}
                                     variant="outlined"
                                     required
                                     fullWidth
@@ -130,7 +129,8 @@ export default function AddPgModal() {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    {...armorValue}
+                                    value={armorInput.inputValue}
+                                    onChange={armorInput.onChange}
                                     variant="outlined"
                                     required
                                     fullWidth
@@ -140,7 +140,8 @@ export default function AddPgModal() {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    {...initiativeValue}
+                                    value={initiativeInput.inputValue}
+                                    onChange={initiativeInput.onChange}
                                     variant="outlined"
                                     required
                                     fullWidth

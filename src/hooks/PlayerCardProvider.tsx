@@ -21,7 +21,7 @@ const emptyPlayerCardsContextType = {
 const PlayerCardContext = createContext<PlayerCardsContextType>(emptyPlayerCardsContextType);
 export const usePlayerCards = () => useContext(PlayerCardContext);
 
-export default function PlayerCardProvider({children}: {children: any}) {
+export const PlayerCardProvider: React.FC = ({children}) => {
     const [playerCards, setPlayerCards] = useState<Array<Player>>(initialCards);
 
     const calculateHp = (currentHp: number, amountToAdd: number, maxHp: number) => Math.max(Math.min(currentHp + amountToAdd, maxHp), 0);
@@ -49,14 +49,12 @@ export default function PlayerCardProvider({children}: {children: any}) {
         setPlayerCards(
             [
                 ...playerCards,
-                new Player(name, hp, hp, armor, initiative, false)
+                {name: name, maxHp: hp, currentHp: hp, armor: armor, initiative: initiative, isCurrentTurn: false}
             ].sort((a, b) => (a.initiative < b.initiative) ? 1 : -1)
         );
     };
 
     const shiftPlayerCards = () => setPlayerCards(playerCards.slice(1).concat(playerCards.slice(0,1)))
-
-    const ppp: PlayerCardsContextType = {playerCards, changeHp, removePlayerCard, addPlayerCard, shiftPlayerCards};
 
     return (
         <PlayerCardContext.Provider value={{playerCards, changeHp, removePlayerCard, addPlayerCard, shiftPlayerCards}}>

@@ -1,7 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
-import LinearProgressWithLabel from "./LinearProgressWithLabel";
+import {LinearProgressWithLabel} from "./LinearProgressWithLabel";
 import {BsFillPersonFill, FaSkull, ImMagicWand} from "react-icons/all";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -13,7 +13,8 @@ import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from "clsx";
-import ChangeHpModal from "./modal/ChangeHpModal";
+import {ChangeHpModal} from "./modal/ChangeHpModal";
+import { FC } from "react";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,7 +52,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PgCard({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePg}) {
+type PgCardType = {
+    name: string,
+    maxHp: number,
+    currentHp: number,
+    armor: number
+    initiative: number,
+    isCurrentTurn: boolean,
+    removePlayerCard: (name: string) => void
+}
+
+export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePlayerCard}) => {
     const classes = useStyles()
 
     const isAlive = currentHp > 0
@@ -68,21 +79,21 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, isCur
                     title={name}
                     className={classes.cardHeader}
                     action={
-                        <IconButton aria-label="remove" onClick={() => removePg(name)}>
+                        <IconButton aria-label="remove" onClick={() => removePlayerCard(name)}>
                             <DeleteIcon/>
                         </IconButton>}
                 />
                 <CardContent className={classes.cardContent}>
-                    <Grid container spacing={1} alignItems="center" justify="center">
+                    <Grid container spacing={1} alignItems="center">
                         <Grid item sm={8} xs={12}>
                             <LinearProgressWithLabel currentHp={currentHp} maxHp={maxHp}/>
                         </Grid>
-                        <Grid item sm={2} xs={6} align="center">
+                        <Grid item sm={2} xs={6} alignContent="center">
                             <Avatar aria-label="recipe" className={classes.armor}>
                                 {armor}
                             </Avatar>
                         </Grid>
-                        <Grid item sm={2} xs={6} align="center">
+                        <Grid item sm={2} xs={6} alignContent="center">
                             <Avatar aria-label="recipe" className={classes.initiative}>
                                 {initiative}
                             </Avatar>

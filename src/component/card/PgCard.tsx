@@ -13,8 +13,9 @@ import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from "clsx";
-import {ChangeHpModal} from "./modal/ChangeHpModal";
+import {ChangeHpModal} from "../modal/ChangeHpModal";
 import { FC } from "react";
+import { PlayerStats } from "./PlayerStats";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,12 +34,6 @@ const useStyles = makeStyles((theme) => ({
     avatarDead: {
         backgroundColor: red[500],
     },
-    initiative: {
-        backgroundColor: green[500],
-    },
-    armor: {
-        backgroundColor: blue[500],
-    },
     cardContent: {
         marginLeft: "8px",
         marginRight: "8px"
@@ -50,10 +45,6 @@ const useStyles = makeStyles((theme) => ({
         borderWidth: "medium",
         borderStyle: "solid"
     },
-    avatarDiv: {
-        display: "flex",
-        justifyContent: "space-around"
-    }
 }));
 
 type PgCardType = {
@@ -93,14 +84,10 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                             <LinearProgressWithLabel currentHp={currentHp} maxHp={maxHp}/>
                         </Grid>
                         <Grid item sm={4} xs={12}>
-                            <div className={classes.avatarDiv}>
-                                <Avatar className={classes.armor}>
-                                    {armor}
-                                </Avatar>
-                                <Avatar className={classes.initiative}>
-                                    {initiative}
-                                </Avatar>
-                            </div>
+                            <PlayerStats playerStats={[
+                                {value: armor, color: blue[500]},
+                                {value: initiative, color:green[500]}
+                            ]} />
                         </Grid>
                     </Grid>
                 </CardContent>

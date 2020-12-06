@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import {PgCard} from "./PgCard";
+import {PgCard} from "./card/PgCard";
 import {NextTurnButton} from "./buttons/NextTurnButton";
 import { usePlayerCards } from "../hooks/PlayerCardProvider";
 import {AddPgModal} from "./modal/AddPgModal";

@@ -35,9 +35,11 @@ const useStyles = makeStyles((theme) => ({
     },
     initiative: {
         backgroundColor: green[500],
+        marginLeft: "20%"
     },
     armor: {
         backgroundColor: blue[500],
+        marginLeft: "20%"
     },
     cardContent: {
         marginLeft: "8px",
@@ -84,16 +86,16 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                         </IconButton>}
                 />
                 <CardContent className={classes.cardContent}>
-                    <Grid container spacing={1} alignItems="center">
+                    <Grid container spacing={1} alignItems="center" justifyContent="space-around">
                         <Grid item sm={8} xs={12}>
                             <LinearProgressWithLabel currentHp={currentHp} maxHp={maxHp}/>
                         </Grid>
-                        <Grid item sm={2} xs={6} alignContent="center">
+                        <Grid item sm={2} xs={6}>
                             <Avatar aria-label="recipe" className={classes.armor}>
                                 {armor}
                             </Avatar>
                         </Grid>
-                        <Grid item sm={2} xs={6} alignContent="center">
+                        <Grid item sm={2} xs={6}>
                             <Avatar aria-label="recipe" className={classes.initiative}>
                                 {initiative}
                             </Avatar>

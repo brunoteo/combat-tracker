@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {PgCardList} from "./PgCardList";
-import {Menu} from "./Menu";
+import {Menu} from "./menu/Menu";
 import { PlayerCardProvider } from '../hooks/PlayerCardProvider';
 
 const useStyles = makeStyles((theme) => ({

@@ -1,4 +1,7 @@
 export type PlayerStatType = {
     color: string,
-    value: number
+    playerName: string,
+    statName: string,
+    value: number,
+    changeStat: (name: string, amountToAdd: number) => void
 }

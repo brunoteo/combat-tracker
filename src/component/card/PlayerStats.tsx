@@ -19,7 +19,7 @@ export const PlayerStats: React.FC<PlayerStatsType> = ({playerStats}) => {
 
     return (
         <div className={classes.root}>
-            {playerStats.map(s => <PlayerStat key={s.value+s.color} value={s.value} color={s.color} />)}
+            {playerStats.map(s => <PlayerStat key={s.value+s.color} value={s.value} color={s.color} statName={s.statName} changeStat={s.changeStat} playerName={s.playerName} />)}
         </div>
     )
 }

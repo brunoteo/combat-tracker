@@ -16,6 +16,7 @@ import clsx from "clsx";
 import {ChangeHpModal} from "../modal/ChangeHpModal";
 import { FC } from "react";
 import { PlayerStats } from "./PlayerStats";
+import { usePlayerCards } from "../../hooks/PlayerCardProvider";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,6 +60,7 @@ type PgCardType = {
 
 export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePlayerCard}) => {
     const classes = useStyles()
+    const {changeArmor, changeInitiative} = usePlayerCards();
 
     const isAlive = currentHp > 0
 
@@ -85,8 +87,8 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                         </Grid>
                         <Grid item sm={4} xs={12}>
                             <PlayerStats playerStats={[
-                                {value: armor, color: blue[500]},
-                                {value: initiative, color:green[500]}
+                                {value: armor, color: blue[500], playerName: name, statName: "armor", changeStat: changeArmor},
+                                {value: initiative, color: green[500], playerName: name, statName: "initiative", changeStat: changeInitiative},
                             ]} />
                         </Grid>
                     </Grid>

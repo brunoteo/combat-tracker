@@ -7,7 +7,9 @@ type PlayerCardsContextType = {
     changeHp: (name: string, amountToAdd: number) => void
     removePlayerCard: (name: string) => void
     addPlayerCard: (name: string, hp: number, armor: number, initiative: number) => void
-    shiftPlayerCards: () => void
+    shiftPlayerCards: () => void,
+    changeArmor: (name: string, amountToAdd: number) => void,
+    changeInitiative: (name: string, amountToAdd: number) => void
 }
 
 const emptyPlayerCardsContextType = {
@@ -15,7 +17,9 @@ const emptyPlayerCardsContextType = {
     changeHp: (name: string, amountToAdd: number) => {},
     removePlayerCard: (name: string) => {},
     addPlayerCard: (name: string, hp: number, armor: number, initiative: number) => {},
-    shiftPlayerCards: () => {}
+    shiftPlayerCards: () => {},
+    changeArmor: (name: string, amountToAdd: number) => {},
+    changeInitiative: (name: string, amountToAdd: number) => {}
 }
 
 const PlayerCardContext = createContext<PlayerCardsContextType>(emptyPlayerCardsContextType);
@@ -33,6 +37,32 @@ export const PlayerCardProvider: React.FC = ({children}) => {
                     {
                         ...playerCard,
                         currentHp: calculateHp(playerCard.currentHp, amountToAdd, playerCard.maxHp)
+                    } :
+                    playerCard
+            )
+        );
+    }
+
+    const changeArmor = (name: string, amountToAdd: number) => {
+        setPlayerCards(
+            playerCards.map(
+                playerCard => (playerCard.name === name) ?
+                    {
+                        ...playerCard,
+                        armor: Math.max(playerCard.armor + amountToAdd, 0)
+                    } :
+                    playerCard
+            )
+        );
+    }
+
+    const changeInitiative = (name: string, amountToAdd: number) => {
+        setPlayerCards(
+            playerCards.map(
+                playerCard => (playerCard.name === name) ?
+                    {
+                        ...playerCard,
+                        armor: Math.max(playerCard.initiative + amountToAdd, 0)
                     } :
                     playerCard
             )
@@ -57,7 +87,7 @@ export const PlayerCardProvider: React.FC = ({children}) => {
     const shiftPlayerCards = () => setPlayerCards(playerCards.slice(1).concat(playerCards.slice(0,1)))
 
     return (
-        <PlayerCardContext.Provider value={{playerCards, changeHp, removePlayerCard, addPlayerCard, shiftPlayerCards}}>
+        <PlayerCardContext.Provider value={{playerCards, changeHp, removePlayerCard, addPlayerCard, shiftPlayerCards, changeArmor, changeInitiative}}>
             {children}
         </PlayerCardContext.Provider>
     );

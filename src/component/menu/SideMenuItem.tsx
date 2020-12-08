@@ -1,6 +1,6 @@
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import React from "react"
-import { MenuItem } from "../../shared/MenuItem"
+import { MenuItem } from "./MenuItem"
 
 export const SideMenuItem: React.FC<MenuItem> = ({textToShow, iconToShow, iconSize, enabled}) => {
     return (

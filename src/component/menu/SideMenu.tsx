@@ -2,7 +2,7 @@ import { Divider, Drawer, IconButton, List } from "@material-ui/core"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import clsx from "clsx";
 import React from "react"
-import { MenuItem } from "../../shared/MenuItem";
+import { MenuItem } from "./MenuItem";
 import { SideMenuItem } from "./SideMenuItem";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 

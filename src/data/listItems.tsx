@@ -1,5 +1,5 @@
 import {FaCampground, GiBlackKnightHelm, GiSpikedDragonHead, RiSwordLine} from "react-icons/all";
-import { MenuItem } from '../shared/MenuItem';
+import {MenuItem} from "../component/menu/MenuItem"
 
 export const menuListItems: MenuItem[] = [
     {textToShow:"Quick Battle", iconToShow: RiSwordLine, iconSize: 30, enabled: true},

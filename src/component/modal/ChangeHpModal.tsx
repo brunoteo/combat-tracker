@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import {useInput} from "../../hooks/useInput"
 import {usePlayerCards} from "../../hooks/PlayerCardProvider"
 import Tooltip from "@material-ui/core/Tooltip";
+import { FormEvent } from 'react';
+import { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,10 +33,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ChangeHpModal({name}) {
+type ChangeHpType = {
+    name: string
+}
+
+export const ChangeHpModal: FC<ChangeHpType> = ({name}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [hpValue, resetHp] = useInput(0);
+    const hpInput = useInput("0");
     const {changeHp} = usePlayerCards();
 
     const handleOpen = () => {
@@ -45,16 +51,16 @@ export default function ChangeHpModal({name}) {
         setOpen(false);
     };
 
-    const handleHp = e => {
+    const handleHp = (e: FormEvent) => {
         e.preventDefault();
-        changeHp(name, hpValue.value)
-        resetHp();
+        changeHp(name, Number(hpInput.inputValue));
+        hpInput.reset();
         handleClose();
     };
 
-    const handleCloseButton = e => {
+    const handleCloseButton = (e: FormEvent) => {
         e.preventDefault();
-        resetHp();
+        hpInput.reset();
         handleClose();
     };
 
@@ -74,7 +80,8 @@ export default function ChangeHpModal({name}) {
                     <form onSubmit={handleHp} className={classes.form}
                           autoComplete="off">
                         <TextField
-                            {...hpValue}
+                            value={hpInput.inputValue}
+                            onChange={hpInput.onChange}
                             autoFocus
                             variant="outlined"
                             required

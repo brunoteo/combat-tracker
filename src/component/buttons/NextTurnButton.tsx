@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function NextTurnButton() {
+export const NextTurnButton = () => {
     const classes = useStyles();
     const {shiftPlayerCards} = usePlayerCards();
 

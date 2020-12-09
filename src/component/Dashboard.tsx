@@ -1,9 +1,9 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import PgCardList from "./PgCardList";
-import Menu from "./Menu";
-import PlayerCardProvider from "../hooks/PlayerCardProvider";
+import {PgCardList} from "./PgCardList";
+import {Menu} from "./menu/Menu";
+import { PlayerCardProvider } from '../hooks/PlayerCardProvider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dashboard() {
+export const Dashboard = () => {
     const classes = useStyles();
 
     return (

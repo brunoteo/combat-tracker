@@ -1,7 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
-import LinearProgressWithLabel from "./LinearProgressWithLabel";
+import {LinearProgressWithLabel} from "./LinearProgressWithLabel";
 import {BsFillPersonFill, FaSkull, ImMagicWand} from "react-icons/all";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -13,8 +13,10 @@ import CardContent from "@material-ui/core/CardContent";
 import {blue, green} from "@material-ui/core/colors";
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from "clsx";
-import ChangeHpModal from "./modal/ChangeHpModal";
-import {usePlayerCards} from "../hooks/PlayerCardProvider";
+import {ChangeHpModal} from "../modal/ChangeHpModal";
+import { FC } from "react";
+import { PlayerStats } from "./PlayerStats";
+import { usePlayerCards } from "../../hooks/PlayerCardProvider";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,12 +35,6 @@ const useStyles = makeStyles((theme) => ({
     avatarDead: {
         backgroundColor: red[500],
     },
-    initiative: {
-        backgroundColor: green[500],
-    },
-    armor: {
-        backgroundColor: blue[500],
-    },
     cardContent: {
         marginLeft: "8px",
         marginRight: "8px"
@@ -52,10 +48,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PgCard({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePg}) {
-    const classes = useStyles()
+type PgCardType = {
+    name: string,
+    maxHp: number,
+    currentHp: number,
+    armor: number
+    initiative: number,
+    isCurrentTurn: boolean,
+    removePlayerCard: (name: string) => void
+}
 
-    const {removePlayerCard} = usePlayerCards();
+export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePlayerCard}) => {
+    const classes = useStyles()
+    const {changeArmor, changeInitiative} = usePlayerCards();
 
     const isAlive = currentHp > 0
 
@@ -76,19 +81,15 @@ export default function PgCard({name, maxHp, currentHp, armor, initiative, isCur
                         </IconButton>}
                 />
                 <CardContent className={classes.cardContent}>
-                    <Grid container spacing={1} alignItems="center" justify="center">
+                    <Grid container spacing={1} alignItems="center" justifyContent="space-around">
                         <Grid item sm={8} xs={12}>
                             <LinearProgressWithLabel currentHp={currentHp} maxHp={maxHp}/>
                         </Grid>
-                        <Grid item sm={2} xs={6} align="center">
-                            <Avatar aria-label="recipe" className={classes.armor}>
-                                {armor}
-                            </Avatar>
-                        </Grid>
-                        <Grid item sm={2} xs={6} align="center">
-                            <Avatar aria-label="recipe" className={classes.initiative}>
-                                {initiative}
-                            </Avatar>
+                        <Grid item sm={4} xs={12}>
+                            <PlayerStats playerStats={[
+                                {value: armor, color: blue[500], playerName: name, statName: "armor", changeStat: changeArmor},
+                                {value: initiative, color: green[500], playerName: name, statName: "initiative", changeStat: changeInitiative},
+                            ]} />
                         </Grid>
                     </Grid>
                 </CardContent>

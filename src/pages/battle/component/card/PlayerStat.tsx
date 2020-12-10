@@ -38,7 +38,7 @@ export const PlayerStat: React.FC<PlayerStatType> = ({ color, playerName, statNa
     const classes = useStyles({ color });
 
     const [open, setOpen] = React.useState(false);
-    const statInput = useInput("0");
+    const {inputValue : statValue, onChange: handleStatChange, reset: resetStatValue} = useInput("0");
 
     const handleOpen = () => {
         setOpen(true);
@@ -50,14 +50,14 @@ export const PlayerStat: React.FC<PlayerStatType> = ({ color, playerName, statNa
 
     const handleStat = (e: FormEvent) => {
         e.preventDefault();
-        changeStat(playerName, Number(statInput.inputValue));
-        statInput.reset();
+        changeStat(playerName, Number(statValue));
+        resetStatValue();
         handleClose();
     };
 
     const handleCloseButton = (e: FormEvent) => {
         e.preventDefault();
-        statInput.reset();
+        resetStatValue();
         handleClose();
     };
 
@@ -75,8 +75,8 @@ export const PlayerStat: React.FC<PlayerStatType> = ({ color, playerName, statNa
                     <form onSubmit={handleStat} className={classes.form}
                         autoComplete="off">
                         <TextField
-                            value={statInput.inputValue}
-                            onChange={statInput.onChange}
+                            value={statValue}
+                            onChange={handleStatChange}
                             autoFocus
                             variant="outlined"
                             required

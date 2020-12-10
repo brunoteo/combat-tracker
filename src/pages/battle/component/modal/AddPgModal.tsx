@@ -38,17 +38,17 @@ const useStyles = makeStyles((theme) => ({
         right: theme.spacing(2),
         zIndex: 1000
     }
-}));
+}))
 
 export const AddPgModal = () => {
-    const classes = useStyles();
+    const classes = useStyles()
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false)
 
-    const nameInput = useInput("");
-    const hpInput = useInput("");
-    const armorInput = useInput("");
-    const initiativeInput = useInput("");
+    const {inputValue : nameValue, onChange: handleNameChange, reset: resetNameValue} = useInput("")
+    const {inputValue : hpValue, onChange: handleHpChange, reset: resetHpValue} = useInput("")
+    const {inputValue : armorValue, onChange: handleArmorChange, reset: resetArmorValue} = useInput("")
+    const {inputValue : initValue, onChange: handleInitChange, reset: resetInitValue} = useInput("")
 
     const {addPlayerCard} = usePlayerCards();
 
@@ -63,23 +63,23 @@ export const AddPgModal = () => {
     const handleNewPg = (e: FormEvent) => {
         e.preventDefault()
 
-        addPlayerCard(nameInput.inputValue, Number(hpInput.inputValue), Number(armorInput.inputValue), Number(initiativeInput.inputValue))
+        addPlayerCard(nameValue, Number(hpValue), Number(armorValue), Number(initValue))
 
-        nameInput.reset()
-        hpInput.reset()
-        armorInput.reset()
-        initiativeInput.reset()
+        resetNameValue()
+        resetHpValue()
+        resetArmorValue()
+        resetInitValue()
 
-        handleClose();
+        handleClose()
     }
 
     const handleCloseButton = (e: FormEvent) => {
         e.preventDefault()
 
-        nameInput.reset()
-        hpInput.reset()
-        armorInput.reset()
-        initiativeInput.reset()
+        resetNameValue()
+        resetHpValue()
+        resetArmorValue()
+        resetInitValue()
 
         handleClose()
     }
@@ -106,8 +106,8 @@ export const AddPgModal = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
-                                    value={nameInput.inputValue}
-                                    onChange={nameInput.onChange}
+                                    value={nameValue}
+                                    onChange={handleNameChange}
                                     autoFocus
                                     variant="outlined"
                                     required
@@ -118,8 +118,8 @@ export const AddPgModal = () => {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    value={hpInput.inputValue}
-                                    onChange={hpInput.onChange}
+                                    value={hpValue}
+                                    onChange={handleHpChange}
                                     variant="outlined"
                                     required
                                     fullWidth
@@ -129,8 +129,8 @@ export const AddPgModal = () => {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    value={armorInput.inputValue}
-                                    onChange={armorInput.onChange}
+                                    value={armorValue}
+                                    onChange={handleArmorChange}
                                     variant="outlined"
                                     required
                                     fullWidth
@@ -140,8 +140,8 @@ export const AddPgModal = () => {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
-                                    value={initiativeInput.inputValue}
-                                    onChange={initiativeInput.onChange}
+                                    value={initValue}
+                                    onChange={handleInitChange}
                                     variant="outlined"
                                     required
                                     fullWidth

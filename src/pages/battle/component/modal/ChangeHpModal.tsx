@@ -1,22 +1,20 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import React, {FC, FormEvent} from "react";
+import {makeStyles} from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
 import IconButton from "@material-ui/core/IconButton";
 import {RiSwordLine} from "react-icons/all";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {useInput} from "../../hooks/useInput"
-import {usePlayerCards} from "../../hooks/PlayerCardProvider"
+import {useInput} from "../../hooks/useInput";
+import {usePlayerCards} from "../../hooks/PlayerCardProvider";
 import Tooltip from "@material-ui/core/Tooltip";
-import { FormEvent } from 'react';
-import { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        position: 'absolute',
+        position: "absolute",
         width: 400,
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
+        border: "2px solid #000",
         boxShadow: theme.shadows[5],
         padding: theme.spacing(1, 3, 1),
         top: `50%`,
@@ -24,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         transform: `translate(-50%, -50%)`,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: "100%", // Fix IE 11 issue.
         marginTop: theme.spacing(1),
     },
     buttons: {
@@ -39,8 +37,11 @@ type ChangeHpType = {
 
 export const ChangeHpModal: FC<ChangeHpType> = ({name}) => {
     const classes = useStyles();
+    
     const [open, setOpen] = React.useState(false);
-    const hpInput = useInput("0");
+    
+    const {inputValue : hpValue, onChange: handleHpChange, reset: resetHpValue} = useInput("");
+    
     const {changeHp} = usePlayerCards();
 
     const handleOpen = () => {
@@ -53,14 +54,14 @@ export const ChangeHpModal: FC<ChangeHpType> = ({name}) => {
 
     const handleHp = (e: FormEvent) => {
         e.preventDefault();
-        changeHp(name, Number(hpInput.inputValue));
-        hpInput.reset();
+        changeHp(name, Number(hpValue));
+        resetHpValue();
         handleClose();
     };
 
     const handleCloseButton = (e: FormEvent) => {
         e.preventDefault();
-        hpInput.reset();
+        resetHpValue();
         handleClose();
     };
 
@@ -68,7 +69,7 @@ export const ChangeHpModal: FC<ChangeHpType> = ({name}) => {
         <div>
             <Tooltip title={"Change HP"}>
                 <IconButton aria-label="Attack" onClick={handleOpen}>
-                    <RiSwordLine />
+                    <RiSwordLine/>
                 </IconButton>
             </Tooltip>
             <Modal
@@ -80,8 +81,8 @@ export const ChangeHpModal: FC<ChangeHpType> = ({name}) => {
                     <form onSubmit={handleHp} className={classes.form}
                           autoComplete="off">
                         <TextField
-                            value={hpInput.inputValue}
-                            onChange={hpInput.onChange}
+                            value={hpValue}
+                            onChange={handleHpChange}
                             autoFocus
                             variant="outlined"
                             required

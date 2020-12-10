@@ -7,7 +7,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import {menuListItems} from "../../data/listItems";
+import {menuListItems} from "../../../data/listItems";
 import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";

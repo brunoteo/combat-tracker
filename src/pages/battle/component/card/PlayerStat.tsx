@@ -1,18 +1,13 @@
-import { Avatar, Button, Modal, TextField } from "@material-ui/core"
+import { Button, Modal, TextField } from "@material-ui/core"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import React, { FormEvent } from "react"
 import { useInput } from "../../hooks/useInput";
 import { PlayerStatType } from "./PlayerStatType";
 
-type PlayerStatStyle = {
-    color: string
-}
-
 const useStyles = makeStyles((theme) => ({
-    root: (props: PlayerStatStyle) => ({
-        backgroundColor: props.color,
+    root: {
         cursor: "pointer",
-    }),
+    },
     paper: {
         position: 'absolute',
         width: 400,
@@ -34,10 +29,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const PlayerStat: React.FC<PlayerStatType> = ({ color, playerName, statName, value, changeStat }) => {
-    const classes = useStyles({ color });
+export const PlayerStat: React.FC<PlayerStatType> = ({playerName, statName, value, changeStat, children }) => {
+    const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
+
     const {inputValue : statValue, onChange: handleStatChange, reset: resetStatValue} = useInput("0");
 
     const handleOpen = () => {
@@ -63,9 +59,9 @@ export const PlayerStat: React.FC<PlayerStatType> = ({ color, playerName, statNa
 
     return (
         <div>
-            <Avatar className={classes.root} onClick={handleOpen}>
-                {value}
-            </Avatar>
+            <div className={classes.root} onClick={handleOpen}>
+                {children}
+            </div>
             <Modal
                 open={open}
                 onClose={handleClose}

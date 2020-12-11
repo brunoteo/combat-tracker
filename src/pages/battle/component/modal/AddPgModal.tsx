@@ -10,6 +10,8 @@ import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fab from "@material-ui/core/Fab";
 import { FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { addPlayer } from '../../../../store/store';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -50,7 +52,7 @@ export const AddPgModal = () => {
     const {inputValue : armorValue, onChange: handleArmorChange, reset: resetArmorValue} = useInput("")
     const {inputValue : initValue, onChange: handleInitChange, reset: resetInitValue} = useInput("")
 
-    const {addPlayerCard} = usePlayerCards();
+    const dispatch = useDispatch();
 
     const handleOpen = () => {
         setOpen(true)
@@ -63,7 +65,9 @@ export const AddPgModal = () => {
     const handleNewPg = (e: FormEvent) => {
         e.preventDefault()
 
-        addPlayerCard(nameValue, Number(hpValue), Number(armorValue), Number(initValue))
+        dispatch(addPlayer(
+            {name: nameValue, maxHp: Number(hpValue), currentHp: Number(hpValue), armor: Number(armorValue), initiative: Number(initValue), isCurrentTurn: false}
+        ))
 
         resetNameValue()
         resetHpValue()

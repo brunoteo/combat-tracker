@@ -5,9 +5,6 @@ import {initialCards} from "../../../data/stubData";
 type PlayerCardsContextType = {
     playerCards: Array<Player>
     changeHp: (name: string, amountToAdd: number) => void
-    removePlayerCard: (name: string) => void
-    addPlayerCard: (name: string, hp: number, armor: number, initiative: number) => void
-    shiftPlayerCards: () => void,
     changeArmor: (name: string, amountToAdd: number) => void,
     changeInitiative: (name: string, amountToAdd: number) => void
 }
@@ -15,9 +12,6 @@ type PlayerCardsContextType = {
 const emptyPlayerCardsContextType = {
     playerCards: new Array<Player>(),
     changeHp: (name: string, amountToAdd: number) => {},
-    removePlayerCard: (name: string) => {},
-    addPlayerCard: (name: string, hp: number, armor: number, initiative: number) => {},
-    shiftPlayerCards: () => {},
     changeArmor: (name: string, amountToAdd: number) => {},
     changeInitiative: (name: string, amountToAdd: number) => {}
 }
@@ -69,25 +63,8 @@ export const PlayerCardProvider: React.FC = ({children}) => {
         );
     }
 
-    const removePlayerCard = (name: string) => {
-        setPlayerCards(
-            playerCards.filter(playerCard => playerCard.name !== name)
-        )
-    }
-
-    const addPlayerCard = (name: string, hp: number, armor: number, initiative: number) => {
-        setPlayerCards(
-            [
-                ...playerCards,
-                {name: name, maxHp: hp, currentHp: hp, armor: armor, initiative: initiative, isCurrentTurn: false}
-            ].sort((a, b) => (a.initiative < b.initiative) ? 1 : -1)
-        );
-    };
-
-    const shiftPlayerCards = () => setPlayerCards(playerCards.slice(1).concat(playerCards.slice(0,1)))
-
     return (
-        <PlayerCardContext.Provider value={{playerCards, changeHp, removePlayerCard, addPlayerCard, shiftPlayerCards, changeArmor, changeInitiative}}>
+        <PlayerCardContext.Provider value={{playerCards, changeHp, changeArmor, changeInitiative}}>
             {children}
         </PlayerCardContext.Provider>
     );

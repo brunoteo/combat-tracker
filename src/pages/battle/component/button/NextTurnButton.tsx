@@ -2,7 +2,8 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import Fab from "@material-ui/core/Fab";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import {usePlayerCards} from "../../hooks/PlayerCardProvider"
+import { useDispatch } from "react-redux";
+import { shiftPlayers } from "../../../../store/store";
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const NextTurnButton = () => {
     const classes = useStyles();
-    const {shiftPlayerCards} = usePlayerCards();
+    const dispatch = useDispatch();
 
     return (
         <Fab
@@ -24,7 +25,7 @@ export const NextTurnButton = () => {
             color="primary"
             aria-label="next turn"
         >
-            <PlayArrowIcon color="inherit" onClick={shiftPlayerCards}/>
+            <PlayArrowIcon color="inherit" onClick={() => dispatch(shiftPlayers())}/>
         </Fab>
     )
 }

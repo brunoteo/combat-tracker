@@ -22,6 +22,7 @@ import {usePlayerCards} from "../../hooks/PlayerCardProvider";
 import {PlayerStat} from "./PlayerStat";
 import {StatAvatar} from "../StatAvatar";
 import Tooltip from "@material-ui/core/Tooltip";
+import shield from "../../../../images/shield.png";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -97,11 +98,11 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                         <Grid item sm={4} xs={12}>
                             <div className={classes.stats}>
                                 <PlayerStat playerName={name} statName="armor" value={armor} changeStat={changeArmor}>
-                                    <StatAvatar color={blue[500]} value={armor}/>
+                                    <StatAvatar imagePath={shield} value={armor}/>
                                 </PlayerStat>
                                 <PlayerStat playerName={name} statName="initiative" value={initiative}
                                             changeStat={changeInitiative}>
-                                    <StatAvatar color={green[500]} value={armor}/>
+                                    <StatAvatar imagePath={shield} value={initiative}/>
                                 </PlayerStat>
                             </div>
                         </Grid>

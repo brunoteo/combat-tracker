@@ -2,7 +2,6 @@ import { Button, Modal, TextField } from "@material-ui/core"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import React, { FormEvent } from "react"
 import { useInput } from "../../hooks/useInput";
-import { ModalStatType as ModalPlayerStatType } from "./PlayerStatType";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +28,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const PlayerStat: React.FC<ModalPlayerStatType> = ({modalStatTitle, changeStat, children }) => {
+type ModalStatType = {
+    modalStatTitle: string,
+    changeStat: (amountToAdd: number) => void,
+}
+
+export const PlayerStat: React.FC<ModalStatType> = ({modalStatTitle, changeStat, children }) => {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);

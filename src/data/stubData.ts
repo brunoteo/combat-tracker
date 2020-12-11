@@ -7,7 +7,6 @@ export const initialCards: Player[] = [
     currentHp: 10,
     armor: 18,
     initiative: 18,
-    isCurrentTurn: true,
   },
   {
     name: "Player 1",
@@ -15,7 +14,6 @@ export const initialCards: Player[] = [
     currentHp: 10,
     armor: 14,
     initiative: 15,
-    isCurrentTurn: false,
   },
   {
     name: "Enemy 1",
@@ -23,7 +21,6 @@ export const initialCards: Player[] = [
     currentHp: 10,
     armor: 11,
     initiative: 10,
-    isCurrentTurn: false,
   },
   {
     name: "Enemy 2",
@@ -31,6 +28,5 @@ export const initialCards: Player[] = [
     currentHp: 0,
     armor: 11,
     initiative: 10,
-    isCurrentTurn: false,
   },
 ];

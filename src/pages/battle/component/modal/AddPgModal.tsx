@@ -4,7 +4,6 @@ import Modal from '@material-ui/core/Modal';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {useInput} from "../../hooks/useInput"
-import {usePlayerCards} from "../../hooks/PlayerCardProvider"
 import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -66,7 +65,7 @@ export const AddPgModal = () => {
         e.preventDefault()
 
         dispatch(addPlayer(
-            {name: nameValue, maxHp: Number(hpValue), currentHp: Number(hpValue), armor: Number(armorValue), initiative: Number(initValue), isCurrentTurn: false}
+            {name: nameValue, maxHp: Number(hpValue), currentHp: Number(hpValue), armor: Number(armorValue), initiative: Number(initValue)}
         ))
 
         resetNameValue()

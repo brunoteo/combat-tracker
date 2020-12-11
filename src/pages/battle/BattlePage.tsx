@@ -7,6 +7,7 @@ import {RootState} from "../../store/store";
 
 export const BattlePage: FC = () => {
   const players = useSelector((state: RootState) => state.players)
+  const activePlayer = players[0]?.name
 
   return (
     <main>
@@ -16,6 +17,7 @@ export const BattlePage: FC = () => {
         <PgCard
           key={player.name}
           {...player}
+          isCurrentTurn={player.name === activePlayer}
         />
       ))}
     </main>

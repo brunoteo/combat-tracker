@@ -4,5 +4,4 @@ export type Player = {
     currentHp: number;
     armor: number;
     initiative: number;
-    isCurrentTurn: boolean;
 }

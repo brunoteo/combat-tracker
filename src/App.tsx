@@ -1,10 +1,12 @@
 import "./App.css";
 import React from "react";
+import {Provider} from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Menu } from "./shared/component/menu/Menu";
 import Container from "@material-ui/core/Container";
+import { Menu } from "./shared/component/menu/Menu";
 import { PlayerCardProvider } from "./pages/battle/hooks/PlayerCardProvider";
 import { BattlePage } from "./pages/battle/BattlePage";
+import {store} from "./store/store";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +37,9 @@ function App() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <PlayerCardProvider>
-            <BattlePage />
+            <Provider store={store}>
+              <BattlePage />
+            </Provider>
           </PlayerCardProvider>
         </Container>
       </main>

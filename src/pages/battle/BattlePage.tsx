@@ -1,21 +1,21 @@
-import React, { FC } from "react";
-import { PgCard } from "./component/card/PgCard";
-import { NextTurnButton } from "./component/button/NextTurnButton";
-import { AddPgModal } from "./component/modal/AddPgModal";
-import { usePlayerCards } from "./hooks/PlayerCardProvider";
+import React, { FC } from "react"
+import {useSelector} from "react-redux"
+import { PgCard } from "./component/card/PgCard"
+import { NextTurnButton } from "./component/button/NextTurnButton"
+import { AddPgModal } from "./component/modal/AddPgModal"
+import {RootState} from "../../store/store";
 
 export const BattlePage: FC = () => {
-  const { playerCards, removePlayerCard } = usePlayerCards();
+  const players = useSelector((state: RootState) => state.players)
 
   return (
     <main>
       <AddPgModal />
       <NextTurnButton />
-      {playerCards.map((playerCard) => (
+      {players.map((player) => (
         <PgCard
-          key={playerCard.name}
-          {...playerCard}
-          removePlayerCard={removePlayerCard}
+          key={player.name}
+          {...player}
         />
       ))}
     </main>

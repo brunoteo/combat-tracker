@@ -15,7 +15,7 @@ import red from "@material-ui/core/colors/red";
 import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import {blue, green} from "@material-ui/core/colors";
+import {green} from "@material-ui/core/colors";
 import DeleteIcon from "@material-ui/icons/Delete";
 import clsx from "clsx";
 import {usePlayerCards} from "../../hooks/PlayerCardProvider";
@@ -23,6 +23,8 @@ import {PlayerStat} from "./PlayerStat";
 import {StatAvatar} from "../StatAvatar";
 import Tooltip from "@material-ui/core/Tooltip";
 import shield from "../../../../images/shield.png";
+import {useDispatch} from "react-redux";
+import {removePlayer} from "../../../../store/store";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -64,13 +66,13 @@ type PgCardType = {
     currentHp: number,
     armor: number
     initiative: number,
-    isCurrentTurn: boolean,
-    removePlayerCard: (name: string) => void
+    isCurrentTurn: boolean
 }
 
-export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiative, isCurrentTurn, removePlayerCard}) => {
+export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiative, isCurrentTurn}) => {
     const classes = useStyles()
     const {changeArmor, changeHp, changeInitiative} = usePlayerCards();
+    const dispatch = useDispatch();
 
     const isAlive = currentHp > 0
 
@@ -86,7 +88,7 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                     title={name}
                     className={classes.cardHeader}
                     action={
-                        <IconButton aria-label="remove" onClick={() => removePlayerCard(name)}>
+                        <IconButton aria-label="remove" onClick={() => dispatch(removePlayer(name))}>
                             <DeleteIcon/>
                         </IconButton>}
                 />

@@ -18,13 +18,12 @@ import CardContent from "@material-ui/core/CardContent";
 import {green} from "@material-ui/core/colors";
 import DeleteIcon from "@material-ui/icons/Delete";
 import clsx from "clsx";
-import {usePlayerCards} from "../../hooks/PlayerCardProvider";
 import {PlayerStat} from "./PlayerStat";
 import {StatAvatar} from "../StatAvatar";
 import Tooltip from "@material-ui/core/Tooltip";
 import shield from "../../../../images/shield.png";
 import {useDispatch} from "react-redux";
-import {removePlayer} from "../../../../store/store";
+import {changeArmor, changeHp, changeInitiative, removePlayer} from "../../../../store/store";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,7 +70,6 @@ type PgCardType = {
 
 export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiative, isCurrentTurn}) => {
     const classes = useStyles()
-    const {changeArmor, changeHp, changeInitiative} = usePlayerCards();
     const dispatch = useDispatch();
 
     const isAlive = currentHp > 0
@@ -99,11 +97,10 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                         </Grid>
                         <Grid item sm={4} xs={12}>
                             <div className={classes.stats}>
-                                <PlayerStat playerName={name} statName="armor" value={armor} changeStat={changeArmor}>
+                                <PlayerStat modalStatTitle={`${name} armor`} changeStat={(amountToAdd) => dispatch(changeArmor({name, amountToAdd}))} >
                                     <StatAvatar imagePath={shield} value={armor}/>
                                 </PlayerStat>
-                                <PlayerStat playerName={name} statName="initiative" value={initiative}
-                                            changeStat={changeInitiative}>
+                                <PlayerStat modalStatTitle={`${name} initiative`} changeStat={(amountToAdd) => dispatch(changeInitiative({name, amountToAdd}))} >
                                     <StatAvatar imagePath={shield} value={initiative}/>
                                 </PlayerStat>
                             </div>
@@ -111,7 +108,7 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                     </Grid>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <PlayerStat playerName={name} statName="HP" value={currentHp} changeStat={changeHp}>
+                    <PlayerStat modalStatTitle={`${name} HP`} changeStat={(amountToAdd) => dispatch(changeHp({name, amountToAdd}))}>
                         <Tooltip title={"Change HP"}>
                             <IconButton aria-label="Attack">
                                 <RiSwordLine/>

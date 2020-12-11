@@ -2,7 +2,7 @@ import { Button, Modal, TextField } from "@material-ui/core"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import React, { FormEvent } from "react"
 import { useInput } from "../../hooks/useInput";
-import { PlayerStatType } from "./PlayerStatType";
+import { ModalStatType as ModalPlayerStatType } from "./PlayerStatType";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const PlayerStat: React.FC<PlayerStatType> = ({playerName, statName, value, changeStat, children }) => {
+export const PlayerStat: React.FC<ModalPlayerStatType> = ({modalStatTitle, changeStat, children }) => {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -46,7 +46,7 @@ export const PlayerStat: React.FC<PlayerStatType> = ({playerName, statName, valu
 
     const handleStat = (e: FormEvent) => {
         e.preventDefault();
-        changeStat(playerName, Number(statValue));
+        changeStat(Number(statValue));
         resetStatValue();
         handleClose();
     };
@@ -67,7 +67,7 @@ export const PlayerStat: React.FC<PlayerStatType> = ({playerName, statName, valu
                 onClose={handleClose}
             >
                 <div className={classes.paper}>
-                    <h2>Change {playerName} {statName}</h2>
+                    <h2>Change {modalStatTitle}</h2>
                     <form onSubmit={handleStat} className={classes.form}
                         autoComplete="off">
                         <TextField

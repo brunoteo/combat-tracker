@@ -86,7 +86,7 @@ export const PlayerStat: React.FC<ModalStatType> = ({modalStatTitle, changeStat,
                         />
                         <div className={classes.buttons}>
                             <Button type="submit" color="primary">
-                                Add
+                                Change
                             </Button>
                             <Button color="primary" onClick={handleCloseButton}>
                                 Cancel

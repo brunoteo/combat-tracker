@@ -59,7 +59,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+//TODO non posso dirgli che ha un player?
 type PgCardType = {
+    id: string,
     name: string,
     maxHp: number,
     currentHp: number,
@@ -68,7 +70,7 @@ type PgCardType = {
     isCurrentTurn: boolean
 }
 
-export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiative, isCurrentTurn}) => {
+export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initiative, isCurrentTurn}) => {
     const classes = useStyles()
     const dispatch = useDispatch();
 
@@ -86,7 +88,7 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                     title={name}
                     className={classes.cardHeader}
                     action={
-                        <IconButton aria-label="remove" onClick={() => dispatch(removePlayer(name))}>
+                        <IconButton aria-label="remove" onClick={() => dispatch(removePlayer(id))}>
                             <DeleteIcon/>
                         </IconButton>}
                 />
@@ -97,10 +99,10 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                         </Grid>
                         <Grid item sm={4} xs={12}>
                             <div className={classes.stats}>
-                                <PlayerStat modalStatTitle={`${name} armor`} changeStat={(amountToAdd) => dispatch(changeArmor({name, amountToAdd}))} >
+                                <PlayerStat modalStatTitle={`${name} armor`} changeStat={(amountToAdd) => dispatch(changeArmor({id, amountToAdd}))} >
                                     <StatAvatar imagePath={shield} value={armor}/>
                                 </PlayerStat>
-                                <PlayerStat modalStatTitle={`${name} initiative`} changeStat={(amountToAdd) => dispatch(changeInitiative({name, amountToAdd}))} >
+                                <PlayerStat modalStatTitle={`${name} initiative`} changeStat={(amountToAdd) => dispatch(changeInitiative({id, amountToAdd}))} >
                                     <StatAvatar imagePath={shield} value={initiative}/>
                                 </PlayerStat>
                             </div>
@@ -108,7 +110,7 @@ export const PgCard: FC<PgCardType> = ({name, maxHp, currentHp, armor, initiativ
                     </Grid>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <PlayerStat modalStatTitle={`${name} HP`} changeStat={(amountToAdd) => dispatch(changeHp({name, amountToAdd}))}>
+                    <PlayerStat modalStatTitle={`${name} HP`} changeStat={(amountToAdd) => dispatch(changeHp({id, amountToAdd}))}>
                         <Tooltip title={"Change HP"}>
                             <IconButton aria-label="Attack">
                                 <RiSwordLine/>

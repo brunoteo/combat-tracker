@@ -9,9 +9,9 @@ import { Player } from "../shared/model/Player";
 import { findIndexToInsert } from "../shared/utils/arrayUtils";
 
 type ChangeStatData = {
-  name: string;
-  amountToAdd: number;
-};
+    id: string,
+    amountToAdd: number
+}
 
 const calculateHp = (currentHp: number, amountToAdd: number, maxHp: number) => Math.max(Math.min(currentHp + amountToAdd, maxHp), 0);
 
@@ -26,9 +26,9 @@ export const changeInitiative = createAction<ChangeStatData>(
 );
 
 export const playersReducer = createReducer(initialCards, {
-  [removePlayer.type]: (players, action) => players.filter((player) => player.name !== action.payload),
-  [shiftPlayers.type]: (players) => players.slice(1).concat(players.slice(0, 1)),
-  [addPlayer.type]: (players, action) =>
+    [removePlayer.type]: (players, action) => players.filter(player => player.id !== action.payload),
+    [shiftPlayers.type]: (players) => players.slice(1).concat(players.slice(0,1)),
+    [addPlayer.type]: (players, action) =>
     players
       .slice(
         0,
@@ -41,32 +41,22 @@ export const playersReducer = createReducer(initialCards, {
           players.length
         )
       ),
-  [changeHp.type]: (players, action) =>
-    players.map((player) =>
-      player.name === action.payload.name
-        ? {
-            ...player,
-            currentHp: calculateHp(
-              player.currentHp,
-              action.payload.amountToAdd,
-              player.maxHp
-            ),
-          }
-        : player
+    [changeHp.type]: (players, action) => players.map(
+        player => (player.id === action.payload.id) ? {
+                ...player,
+                currentHp: calculateHp(player.currentHp, action.payload.amountToAdd, player.maxHp)
+            } :
+            player
     ),
-  [changeArmor.type]: (players, action) =>
-    players.map((playerCard) =>
-      playerCard.name === action.payload.name
-        ? {
+    [changeArmor.type]: (players, action) => players.map(
+        playerCard => (playerCard.id === action.payload.id) ? {
             ...playerCard,
             armor: Math.max(playerCard.armor + action.payload.amountToAdd, 0),
           }
         : playerCard
     ),
-  [changeInitiative.type]: (players, action) =>
-    players.map((playerCard) =>
-      playerCard.name === action.payload.name
-        ? {
+    [changeInitiative.type]: (players, action) => players.map(
+        playerCard => (playerCard.id === action.payload.id) ? {
             ...playerCard,
             armor: Math.max(playerCard.armor + action.payload.amountToAdd, 0),
           }

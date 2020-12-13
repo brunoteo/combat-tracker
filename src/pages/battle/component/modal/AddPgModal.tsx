@@ -11,6 +11,7 @@ import Fab from "@material-ui/core/Fab";
 import { FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPlayer } from '../../../../store/store';
+import {v4} from "uuid";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -65,7 +66,7 @@ export const AddPgModal = () => {
         e.preventDefault()
 
         dispatch(addPlayer(
-            {name: nameValue, maxHp: Number(hpValue), currentHp: Number(hpValue), armor: Number(armorValue), initiative: Number(initValue)}
+            {id: v4() ,name: nameValue, maxHp: Number(hpValue), currentHp: Number(hpValue), armor: Number(armorValue), initiative: Number(initValue)}
         ))
 
         resetNameValue()

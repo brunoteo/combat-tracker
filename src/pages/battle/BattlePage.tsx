@@ -15,7 +15,7 @@ export const BattlePage: FC = () => {
       <NextTurnButton />
       {players.map((player) => (
         <PgCard
-          key={player.name}
+          key={player.id}
           {...player}
           isCurrentTurn={player.name === activePlayer}
         />

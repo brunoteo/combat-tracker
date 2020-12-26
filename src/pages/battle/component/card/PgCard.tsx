@@ -95,7 +95,7 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                 <CardContent className={classes.cardContent}>
                     <Grid container spacing={1} alignItems="center" justifyContent="space-around">
                         <Grid item sm={8} xs={12}>
-                            <LinearProgressWithLabel currentHp={currentHp} maxHp={maxHp}/>
+                            <LinearProgressWithLabel id={id} name={name} currentHp={currentHp} maxHp={maxHp}/>
                         </Grid>
                         <Grid item sm={4} xs={12}>
                             <div className={classes.stats}>

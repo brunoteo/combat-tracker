@@ -14,6 +14,7 @@ export const removePlayer = createAction<string>("REMOVE_PLAYER")
 export const shiftPlayers = createAction<void>("SHIFT_PLAYER")
 export const addPlayer = createAction<Player>("ADD_PLAYER")
 export const changeHp = createAction<ChangeStatData>("CHANGE_HP")
+export const changeMaxHp = createAction<ChangeStatData>("CHANGE_MAX_HP")
 export const changeArmor = createAction<ChangeStatData>("CHANGE_ARMOR")
 export const changeInitiative = createAction<ChangeStatData>("CHANGE_INITIATIVE")
 
@@ -25,6 +26,13 @@ export const playersReducer = createReducer(initialCards, {
         player => (player.id === action.payload.id) ? {
                 ...player,
                 currentHp: calculateHp(player.currentHp, action.payload.amountToAdd, player.maxHp)
+            } :
+            player
+    ),
+    [changeMaxHp.type]: (players, action) => players.map(
+        player => (player.id === action.payload.id) ? {
+                ...player,
+                maxHp: Math.max(player.maxHp + action.payload.amountToAdd, 0)
             } :
             player
     ),

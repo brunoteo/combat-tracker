@@ -38,7 +38,7 @@ export const playersReducer = createReducer(initialCards, {
     [changeInitiative.type]: (players, action) => players.map(
         playerCard => (playerCard.id === action.payload.id) ? {
             ...playerCard,
-            armor: Math.max(playerCard.armor + action.payload.amountToAdd, 0)
+            initiative: Math.max(playerCard.initiative + action.payload.amountToAdd, 0)
         } :
         playerCard
     ),

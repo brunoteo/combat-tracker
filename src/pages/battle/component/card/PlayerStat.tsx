@@ -38,8 +38,8 @@ export const PlayerStat: React.FC<ModalStatType> = ({modalStatTitle, changeStat,
 
     const [open, setOpen] = React.useState(false);
 
-    const {inputValue : statValue, onChange: handleStatChange, reset: resetStatValue} = useInput("0");
-
+    const {inputValue: statValue, onChange: handleStatChange, reset: resetStatValue} = useInput(0);
+    
     const handleOpen = () => {
         setOpen(true);
     };
@@ -50,7 +50,7 @@ export const PlayerStat: React.FC<ModalStatType> = ({modalStatTitle, changeStat,
 
     const handleStat = (e: FormEvent) => {
         e.preventDefault();
-        changeStat(Number(statValue));
+        changeStat(statValue);
         resetStatValue();
         handleClose();
     };

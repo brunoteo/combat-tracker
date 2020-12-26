@@ -48,9 +48,9 @@ export const AddPgModal = () => {
     const [open, setOpen] = React.useState(false)
 
     const {inputValue : nameValue, onChange: handleNameChange, reset: resetNameValue} = useInput("")
-    const {inputValue : hpValue, onChange: handleHpChange, reset: resetHpValue} = useInput("")
-    const {inputValue : armorValue, onChange: handleArmorChange, reset: resetArmorValue} = useInput("")
-    const {inputValue : initValue, onChange: handleInitChange, reset: resetInitValue} = useInput("")
+    const {inputValue : hpValue, onChange: handleHpChange, reset: resetHpValue} = useInput(0)
+    const {inputValue : armorValue, onChange: handleArmorChange, reset: resetArmorValue} = useInput(0)
+    const {inputValue : initValue, onChange: handleInitChange, reset: resetInitValue} = useInput(0)
 
     const dispatch = useDispatch();
 
@@ -66,7 +66,7 @@ export const AddPgModal = () => {
         e.preventDefault()
 
         dispatch(addPlayer(
-            {id: v4() ,name: nameValue, maxHp: Number(hpValue), currentHp: Number(hpValue), armor: Number(armorValue), initiative: Number(initValue)}
+            {id: v4(), name: nameValue, maxHp: hpValue, currentHp: hpValue, armor: armorValue, initiative: initValue}
         ))
 
         resetNameValue()

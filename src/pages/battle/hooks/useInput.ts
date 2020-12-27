@@ -1,7 +1,5 @@
 import { ChangeEvent, useState } from "react";
 
-
-
 export type UseInputType<T> = {
   inputValue: T;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

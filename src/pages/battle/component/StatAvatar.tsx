@@ -44,6 +44,4 @@ export const StatAvatar: React.FC<StatAvatarType> = ({imagePath, value}) => {
             </div>
         </div>
     )
-
-    // return <Avatar className={classes.root} >{value}</Avatar>;
 };

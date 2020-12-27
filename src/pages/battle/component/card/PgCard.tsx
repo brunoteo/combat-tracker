@@ -22,6 +22,7 @@ import {PlayerStat} from "./PlayerStat";
 import {StatAvatar} from "../StatAvatar";
 import Tooltip from "@material-ui/core/Tooltip";
 import shield from "../../../../images/shield.png";
+import fist from "../../../../images/fist.png";
 import {useDispatch} from "react-redux";
 import {changeArmor, changeHp, changeInitiative, removePlayer} from "../../../../store/store";
 
@@ -103,7 +104,7 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                                     <StatAvatar imagePath={shield} value={armor}/>
                                 </PlayerStat>
                                 <PlayerStat modalStatTitle={`${name} initiative`} changeStat={(amountToAdd) => dispatch(changeInitiative({id, amountToAdd}))} >
-                                    <StatAvatar imagePath={shield} value={initiative}/>
+                                    <StatAvatar imagePath={fist} value={initiative}/>
                                 </PlayerStat>
                             </div>
                         </Grid>

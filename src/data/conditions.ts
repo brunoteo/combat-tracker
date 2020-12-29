@@ -1,12 +1,13 @@
 import {IconType} from "react-icons";
 import {
+    FaBed,
     FaDeaf,
     FaWheelchair,
     GiBlindfold,
-    GiCharm, GiCrossedChains, GiDeadHead,
+    GiCharm, GiCrossedChains, GiDeadHead, GiFrozenBody,
     GiInvisible, GiPoisonBottle,
     GiRockGolem,
-    GiWoodenPegleg, ImConfused,
+    GiWoodenPegleg, ImConfused, IoIosBody,
     RiGhost2Fill
 } from "react-icons/all";
 
@@ -38,7 +39,7 @@ export const conditions: ConditionsProps[] = [
     },
     {
         name: "Incapacitated",
-        icon: GiBlindfold //TODO
+        icon: FaBed
     },
     {
         name: "Invisible",
@@ -46,7 +47,7 @@ export const conditions: ConditionsProps[] = [
     },
     {
         name: "Paralyzed",
-        icon: FaWheelchair
+        icon: GiFrozenBody
     },
     {
         name: "Petrified",
@@ -58,7 +59,7 @@ export const conditions: ConditionsProps[] = [
     },
     {
         name: "Prone",
-        icon: GiBlindfold //TODO
+        icon: IoIosBody
     },
     {
         name: "Restrained",

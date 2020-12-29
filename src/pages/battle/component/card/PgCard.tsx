@@ -3,8 +3,9 @@ import React, {FC} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {LinearProgressWithLabel} from "../progressbar/LinearProgressWithLabel";
 import {
-    BsFillPersonFill,
+    BsFillPersonFill, FaDeaf,
     FaSkull,
+    GiBlindfold, GiCharm,
     ImMagicWand,
     RiSwordLine,
 } from "react-icons/all";
@@ -24,7 +25,13 @@ import Tooltip from "@material-ui/core/Tooltip";
 import shield from "../../../../images/shield.png";
 import fist from "../../../../images/fist.png";
 import {useDispatch} from "react-redux";
-import {changeArmor, changeHp, changeInitiative, removePlayer} from "../../../../store/store";
+import {
+    changeArmor,
+    changeHp,
+    changeInitiative,
+    removePlayer,
+} from "../../../../store/store";
+import {ConditionIcon} from "../icon/ConditionIcon";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -100,10 +107,12 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                         </Grid>
                         <Grid item sm={4} xs={12}>
                             <div className={classes.stats}>
-                                <PlayerStat modalStatTitle={`${name} armor`} changeStat={(amountToAdd) => dispatch(changeArmor({id, amountToAdd}))} >
+                                <PlayerStat modalStatTitle={`${name} armor`}
+                                            changeStat={(amountToAdd) => dispatch(changeArmor({id, amountToAdd}))}>
                                     <StatAvatar imagePath={shield} value={armor}/>
                                 </PlayerStat>
-                                <PlayerStat modalStatTitle={`${name} initiative`} changeStat={(amountToAdd) => dispatch(changeInitiative({id, amountToAdd}))} >
+                                <PlayerStat modalStatTitle={`${name} initiative`}
+                                            changeStat={(amountToAdd) => dispatch(changeInitiative({id, amountToAdd}))}>
                                     <StatAvatar imagePath={fist} value={initiative}/>
                                 </PlayerStat>
                             </div>
@@ -111,7 +120,8 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                     </Grid>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <PlayerStat modalStatTitle={`${name} HP`} changeStat={(amountToAdd) => dispatch(changeHp({id, amountToAdd}))}>
+                    <PlayerStat modalStatTitle={`${name} HP`}
+                                changeStat={(amountToAdd) => dispatch(changeHp({id, amountToAdd}))}>
                         <Tooltip title={"Change HP"}>
                             <IconButton aria-label="Attack">
                                 <RiSwordLine/>
@@ -121,6 +131,19 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                     <IconButton aria-label="Conditions" disabled={true}>
                         <ImMagicWand/>
                     </IconButton>
+                    <ConditionIcon name="Blinded">
+                        <GiBlindfold/>
+                    </ConditionIcon>
+                    <Tooltip title={"Charmed"}>
+                        <IconButton aria-label="Charmed">
+                            <GiCharm/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title={"Deafened"}>
+                        <IconButton aria-label="Deafened">
+                            <FaDeaf/>
+                        </IconButton>
+                    </Tooltip>
                 </CardActions>
             </Card>
         </div>

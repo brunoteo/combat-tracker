@@ -66,7 +66,7 @@ export const AddPgModal = () => {
         e.preventDefault()
 
         dispatch(addPlayer(
-            {id: v4(), name: nameValue, maxHp: hpValue, currentHp: hpValue, armor: armorValue, initiative: initValue}
+            {id: v4(), name: nameValue, maxHp: hpValue, currentHp: hpValue, armor: armorValue, initiative: initValue, conditionNames: []}
         ))
 
         resetNameValue()

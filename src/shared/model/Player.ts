@@ -5,4 +5,5 @@ export type Player = {
     currentHp: number;
     armor: number;
     initiative: number;
+    conditionNames: string[];
 }

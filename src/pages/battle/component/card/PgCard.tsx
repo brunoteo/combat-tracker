@@ -3,9 +3,8 @@ import React, {FC} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {LinearProgressWithLabel} from "../progressbar/LinearProgressWithLabel";
 import {
-    BsFillPersonFill, FaDeaf,
+    BsFillPersonFill,
     FaSkull,
-    GiBlindfold, GiCharm,
     ImMagicWand,
     RiSwordLine,
 } from "react-icons/all";
@@ -32,6 +31,7 @@ import {
     removePlayer,
 } from "../../../../store/store";
 import {ConditionIcon} from "../icon/ConditionIcon";
+import { conditions } from "../../../../data/conditions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,6 +65,15 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "space-around",
     },
+    actionsArea: {
+        width: "30%",
+        display: "flex",
+        textAlign: "left"
+    },
+    conditionsArea: {
+        width: "70%",
+        textAlign: "right"
+    },
 }));
 
 //TODO non posso dirgli che ha un player?
@@ -75,10 +84,11 @@ type PgCardType = {
     currentHp: number,
     armor: number
     initiative: number,
+    conditionNames: string[],
     isCurrentTurn: boolean
 }
 
-export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initiative, isCurrentTurn}) => {
+export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initiative, conditionNames, isCurrentTurn}) => {
     const classes = useStyles()
     const dispatch = useDispatch();
 
@@ -120,30 +130,30 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                     </Grid>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <PlayerStat modalStatTitle={`${name} HP`}
-                                changeStat={(amountToAdd) => dispatch(changeHp({id, amountToAdd}))}>
-                        <Tooltip title={"Change HP"}>
-                            <IconButton aria-label="Attack">
-                                <RiSwordLine/>
-                            </IconButton>
-                        </Tooltip>
-                    </PlayerStat>
-                    <IconButton aria-label="Conditions" disabled={true}>
-                        <ImMagicWand/>
-                    </IconButton>
-                    <ConditionIcon name="Blinded">
-                        <GiBlindfold/>
-                    </ConditionIcon>
-                    <Tooltip title={"Charmed"}>
-                        <IconButton aria-label="Charmed">
-                            <GiCharm/>
+                    <div className={classes.actionsArea}>
+                        <PlayerStat modalStatTitle={`${name} HP`}
+                                    changeStat={(amountToAdd) => dispatch(changeHp({id, amountToAdd}))}>
+                            <Tooltip title={"Change HP"}>
+                                <IconButton aria-label="Attack">
+                                    <RiSwordLine/>
+                                </IconButton>
+                            </Tooltip>
+                        </PlayerStat>
+                        <IconButton aria-label="Conditions" disabled={true}>
+                            <ImMagicWand/>
                         </IconButton>
-                    </Tooltip>
-                    <Tooltip title={"Deafened"}>
-                        <IconButton aria-label="Deafened">
-                            <FaDeaf/>
-                        </IconButton>
-                    </Tooltip>
+                    </div>
+                    <div className={classes.conditionsArea}>
+                        {
+                            conditions
+                            .filter(c => conditionNames.includes(c.name.toLowerCase()))
+                            .map(c => (
+                                <ConditionIcon name={c.name} key={id + c.name}>
+                                    {c.icon({})}
+                                </ConditionIcon>
+                            ))
+                        }
+                    </div>
                 </CardActions>
             </Card>
         </div>

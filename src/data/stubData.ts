@@ -8,6 +8,7 @@ export const initialCards: Player[] = [
     currentHp: 10,
     armor: 18,
     initiative: 18,
+    conditionNames: ["blinded"],
   },
   {
     id: "83c7ba2f-7392-4d7d-9e23-35adbe186046",
@@ -16,6 +17,7 @@ export const initialCards: Player[] = [
     currentHp: 10,
     armor: 14,
     initiative: 15,
+    conditionNames: [],
   },
   {
     id: "a11e3995-b0bd-4d58-8c48-5e49ae7f7f23",
@@ -24,6 +26,7 @@ export const initialCards: Player[] = [
     currentHp: 10,
     armor: 11,
     initiative: 10,
+    conditionNames: [],
   },
   {
     id: "a11e3995-b0bd-4d58-8c48-5e49ae7f7f24",
@@ -32,5 +35,6 @@ export const initialCards: Player[] = [
     currentHp: 0,
     armor: 11,
     initiative: 10,
+    conditionNames: [],
   },
 ];

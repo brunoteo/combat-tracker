@@ -5,7 +5,6 @@ import {LinearProgressWithLabel} from "../progressbar/LinearProgressWithLabel";
 import {
     BsFillPersonFill,
     FaSkull,
-    ImMagicWand,
     RiSwordLine,
 } from "react-icons/all";
 import Card from "@material-ui/core/Card";
@@ -25,13 +24,16 @@ import shield from "../../../../images/shield.png";
 import fist from "../../../../images/fist.png";
 import {useDispatch} from "react-redux";
 import {
+    addCondition,
     changeArmor,
     changeHp,
     changeInitiative,
+    removeCondition,
     removePlayer,
 } from "../../../../store/store";
 import {ConditionIcon} from "../icon/ConditionIcon";
 import { conditions } from "../../../../data/conditions";
+import { AddConditionModal } from "../modal/AddConditionModal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -139,16 +141,14 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                                 </IconButton>
                             </Tooltip>
                         </PlayerStat>
-                        <IconButton aria-label="Conditions" disabled={true}>
-                            <ImMagicWand/>
-                        </IconButton>
+                        <AddConditionModal addCondition={(conditionName) => dispatch(addCondition({id: id, conditionToAdd: conditionName}))} />
                     </div>
                     <div className={classes.conditionsArea}>
                         {
                             conditions
                             .filter(c => conditionNames.includes(c.name.toLowerCase()))
                             .map(c => (
-                                <ConditionIcon name={c.name} key={id + c.name}>
+                                <ConditionIcon name={c.name} key={id + c.name} removeAction={() => dispatch(removeCondition({id: id,conditionToRemove: c.name.toLowerCase()}))}>
                                     {c.icon({})}
                                 </ConditionIcon>
                             ))

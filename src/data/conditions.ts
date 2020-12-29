@@ -2,7 +2,6 @@ import {IconType} from "react-icons";
 import {
     FaBed,
     FaDeaf,
-    FaWheelchair,
     GiBlindfold,
     GiCharm, GiCrossedChains, GiDeadHead, GiFrozenBody,
     GiInvisible, GiPoisonBottle,

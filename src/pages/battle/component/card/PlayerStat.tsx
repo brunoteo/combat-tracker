@@ -77,6 +77,7 @@ export const PlayerStat: React.FC<ModalStatType> = ({modalStatTitle, changeStat,
                         <TextField
                             value={statValue}
                             onChange={handleStatChange}
+                            onFocus={e => e.currentTarget.select()}
                             autoFocus
                             variant="outlined"
                             required

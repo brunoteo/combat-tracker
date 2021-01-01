@@ -8,7 +8,7 @@ export type UseInputType<T> = {
 
 export const useInput = <T extends string | number> (initialValue: T): UseInputType<T> => {
 
-  const convert = (value: string) => typeof(initialValue) === "number" ? Number(value) : value
+  const convert = (value: string) => typeof(initialValue) === "number" ? (value !== "" ? Number(value) : value) : value
 
   const [value, setValue] = useState<T>(initialValue);
   return {

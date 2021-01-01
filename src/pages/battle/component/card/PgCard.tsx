@@ -141,7 +141,7 @@ export const PgCard: FC<PgCardType> = ({id, name, maxHp, currentHp, armor, initi
                                 </IconButton>
                             </Tooltip>
                         </PlayerStat>
-                        <AddConditionModal addCondition={(conditionName) => dispatch(addCondition({id: id, conditionToAdd: conditionName}))} />
+                        <AddConditionModal activeConditions={conditionNames} addCondition={(conditionName) => dispatch(addCondition({id: id, conditionToAdd: conditionName}))} />
                     </div>
                     <div className={classes.conditionsArea}>
                         {

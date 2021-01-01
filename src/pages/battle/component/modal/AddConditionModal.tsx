@@ -37,10 +37,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type AddConditionType = {
-    addCondition: (conditionName: string) => void
+    addCondition: (conditionName: string) => void,
+    activeConditions: string[]
 }
 
-export const AddConditionModal: React.FC<AddConditionType> = ({addCondition}) => {
+export const AddConditionModal: React.FC<AddConditionType> = ({addCondition, activeConditions}) => {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -99,7 +100,9 @@ export const AddConditionModal: React.FC<AddConditionType> = ({addCondition}) =>
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                {conditions.map((c) => (
+                {conditions
+                    .filter(c => !activeConditions.includes(c.name.toLowerCase()))
+                    .map((c) => (
                   <MenuItem value={c.name.toLowerCase()} key={c.name + "ToAdd"}>
                     <span className={classes.iconInSelect}>
                         {c.icon({})}
